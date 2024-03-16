@@ -1,0 +1,9 @@
+.codeHighlight pre{
+  background: none !important;
+}
+.codeHighlight span{
+  background: none !important;
+}
+.copyImage:hover path{
+  stroke: #579AFF;
+}

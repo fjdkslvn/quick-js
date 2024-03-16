@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    margin: 0px;
+}
+a {
+    text-decoration: none;
+}
+textarea{
+    border: 2px solid #bfdbfe;
+    outline-color: #3b82f6;
+    border-radius: 4px;
+    resize: none;
+}
