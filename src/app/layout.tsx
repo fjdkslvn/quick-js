@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
+import { Noto_Sans_KR } from 'next/font/google';
 import Navbar from "@/components/navbar";
-import "./globals.css";
+import "@/styles/globals.css";
+
+const noto = Noto_Sans_KR({
+  subsets: ['latin'], // 또는 preload: false
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+});
+
 
 export const metadata: Metadata = {
   title: "Web tutorials",
@@ -14,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <body>
+      <body className={noto.className}>
         <Navbar />
         {children}
       </body>
