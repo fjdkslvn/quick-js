@@ -6,9 +6,10 @@ export default function FunctionPage({ params }: { params: { type: string } }) {
   return (
     <>
       <div>
-      {functionData[params.type].map((funcInfo, index) => (
-        <FunctionBlock key={index} title={funcInfo.title} description={funcInfo.description} funcType={funcInfo.funcType}/>
-      ))}
+        <h2>{params.type}</h2>
+        {Object.keys(functionData[params.type]).map((funcName, index) => (
+          <div key={funcName}>{funcName}</div>
+        ))}
     </div>
     </>
   );

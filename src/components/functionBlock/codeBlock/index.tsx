@@ -7,10 +7,10 @@ import styles from './styles.module.css';
 import { Copy } from '@public/svgs';
 import Toast from '@/components/functionBlock/toast';
 
-const CodeBlock: React.FC<{ funcType: string; setResult: (resultData:string) => void }> = ({funcType, setResult}) => {
+const CodeBlock: React.FC<{ type:string, funcType: string; setResult: (resultData:string) => void }> = ({type, funcType, setResult}) => {
 
   const [data, setData] = useRecoilState(dataState);
-  const [funcInfo, setFuncInfo] = useState<any>(functionData[funcType.split('/')[0]].find(obj => obj.funcType === funcType));
+  const [funcInfo, setFuncInfo] = useState<any>(functionData[type][funcType.split('/')[0]].find(obj => obj.funcType === funcType));
   const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {

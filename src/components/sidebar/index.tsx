@@ -9,14 +9,25 @@ const Sidebar: React.FC = () => {
 
   return (
     <nav className="w-60 p-2">
-      {linkData.map((link) => (
+      {linkData.map((linkInfo) => (
+        <>
           <Link
-            key={link.href}
-            href={link.href}
-            className={pathName === link.href ? "text-blue-500 font-bold pl-2 h-9 mb-1 flex items-center rounded bg-blue-50" : "text-gray-600 pl-2 h-9 mb-1 flex items-center rounded hover:bg-gray-100"}
+            key={linkInfo.href}
+            href={linkInfo.href}
+            className={pathName === linkInfo.href ? "text-blue-500 font-bold pl-2 h-9 mb-1 flex items-center rounded bg-blue-50" : "text-gray-600 pl-2 h-9 mb-1 flex items-center rounded hover:bg-gray-100"}
           >
-            {link.label}
+            {linkInfo.label}
           </Link>
+          {linkInfo.funcList.map((funcInfo) => (
+              <Link
+                key={funcInfo.href}
+                href={funcInfo.href}
+                className={pathName === funcInfo.href ? "text-blue-500 font-bold pl-2 h-9 ml-3 mb-1 flex items-center rounded bg-blue-50" : "text-gray-600 pl-2 h-9 ml-3 mb-1 flex items-center rounded hover:bg-gray-100"}
+              >
+                {funcInfo.label}
+              </Link>
+          ))}
+        </>
       ))}
     </nav>
   );
