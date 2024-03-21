@@ -7,25 +7,24 @@ import styles from './styles.module.css';
 import { Copy } from '@public/svgs';
 import Toast from '@/components/functionBlock/toast';
 
-const CodeBlock: React.FC<{ type:string, funcType: string; setResult: (resultData:string) => void }> = ({type, funcType, setResult}) => {
+const CodeBlock: React.FC<{ id:number, displayCode: string; setResult: (resultData:string) => void }> = ({id, displayCode, setResult}) => {
 
   const [data, setData] = useRecoilState(dataState);
-  const [funcInfo, setFuncInfo] = useState<any>(functionData[type][funcType.split('/')[0]].find(obj => obj.funcType === funcType));
   const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     createResult(); // 기본 결과값 채우기
-  }, [])
+  }, [id])
 
   const createResult = () => {
-    if(data){
-      const resultData = funcInfo.func(eval('(' + data + ')'));
+    if(data && id){ 
+      const resultData = functionData[`func${id}`](eval('(' + data + ')'));
       setResult(JSON.stringify(resultData));
     }
   }
 
   const codeCopy = () => {
-    const code = `const result = ${funcInfo.funcText};
+    const code = `const result = ${displayCode};
     console.log(result);`;
 
     navigator.clipboard.writeText(code)
@@ -46,9 +45,9 @@ const CodeBlock: React.FC<{ type:string, funcType: string; setResult: (resultDat
         </div>
         <div className={["bg-blue-50 w-full min-h-24 rounded-b-lg px-4 py-2 text-sm text-gray-800 font-medium", styles.codeHighlight].join(' ')}>
           <SyntaxHighlighter language={"javascript"}>
-            {`const result = ${funcInfo.funcText};\nconsole.log(result);`}
+            {`const result = ${displayCode};\nconsole.log(result);`}
           </SyntaxHighlighter>
-          <button className="block mx-auto mb-5 bg-blue-300 px-10 h-10 rounded-lg text-gray-700 font-medium" onClick={createResult}>실행</button>
+          <button className="block mx-auto mb-5 bg-blue-300 px-10 h-10 rounded-lg text-gray-700 font-medium hover:bg-blue-200" onClick={createResult}>실행</button>
         </div>
         {showToast && <Toast message={'복사되었습니다.'} onClose={() => setShowToast(false)}/>}
       </div>

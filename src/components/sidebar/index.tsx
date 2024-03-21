@@ -1,33 +1,46 @@
 'use client'
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
-import { linkData } from '@/constants/fucntionData';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getSideMenuData, MenuItem } from "@/services/sideMenu";
 
 const Sidebar: React.FC = () => {
+  const [sideMenu, setSideMenu] = useState<MenuItem[]>([]);
   const pathName = usePathname();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const sideMenu = await getSideMenuData();
+      setSideMenu(sideMenu);
+    } catch (error) {
+      throw new Error('Failed to fetch side menu data in /components/sidebar');
+    }
+  };
 
   return (
     <nav className="w-60 p-2">
-      {linkData.map((linkInfo) => (
-        <>
+      {sideMenu.map((menu) => (
+        <div key={menu.id}>
           <Link
-            key={linkInfo.href}
-            href={linkInfo.href}
-            className={pathName === linkInfo.href ? "text-blue-500 font-bold pl-2 h-9 mb-1 flex items-center rounded bg-blue-50" : "text-gray-600 pl-2 h-9 mb-1 flex items-center rounded hover:bg-gray-100"}
+            href={menu.link}
+            className={pathName === menu.link ? "text-blue-500 font-bold pl-2 h-9 mb-1 flex items-center rounded bg-blue-50" : "text-gray-600 pl-2 h-9 mb-1 flex items-center rounded hover:bg-gray-100"}
           >
-            {linkInfo.label}
+            {menu.name}
           </Link>
-          {linkInfo.funcList.map((funcInfo) => (
+          {menu.sub_menus.map((sub_menu) => (
               <Link
-                key={funcInfo.href}
-                href={funcInfo.href}
-                className={pathName === funcInfo.href ? "text-blue-500 font-bold pl-2 h-9 ml-3 mb-1 flex items-center rounded bg-blue-50" : "text-gray-600 pl-2 h-9 ml-3 mb-1 flex items-center rounded hover:bg-gray-100"}
+                key={sub_menu.id}
+                href={sub_menu.link}
+                className={pathName === sub_menu.link ? "text-blue-500 font-bold pl-2 h-9 ml-3 mb-1 flex items-center rounded bg-blue-50" : "text-gray-600 pl-2 h-9 ml-3 mb-1 flex items-center rounded hover:bg-gray-100"}
               >
-                {funcInfo.label}
+                {sub_menu.name}
               </Link>
           ))}
-        </>
+        </div>
       ))}
     </nav>
   );
