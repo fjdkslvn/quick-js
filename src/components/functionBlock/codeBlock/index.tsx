@@ -1,15 +1,16 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { useRecoilState } from 'recoil';
-import { dataState } from '@/recoil/atom';
+import { dataSelector } from '@/recoil/atom';
 import { functionData } from '@/constants/fucntionData';
 import { useEffect, useState } from 'react';
 import styles from './styles.module.css';
 import { Copy } from '@public/svgs';
 import Toast from '@/components/functionBlock/toast';
 
-const CodeBlock: React.FC<{ id:number, displayCode: string; setResult: (resultData:string) => void }> = ({id, displayCode, setResult}) => {
+const CodeBlock: React.FC<{ dataType:string, id:number, displayCode: string; setResult: (resultData:string) => void }> = ({dataType, id, displayCode, setResult}) => {
 
-  const [data, setData] = useRecoilState(dataState);
+  const selectedData = dataSelector[dataType as keyof typeof dataSelector]; 
+  const [data, setData] = useRecoilState(selectedData);
   const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
@@ -17,8 +18,9 @@ const CodeBlock: React.FC<{ id:number, displayCode: string; setResult: (resultDa
   }, [id])
 
   const createResult = () => {
-    if(data && id){ 
-      const resultData = functionData[`func${id}`](eval('(' + data + ')'));
+    if(data && id){
+      const useData = dataType === 'string' ? data : eval('(' + data + ')');
+      const resultData = functionData[`func${id}`](useData);
       setResult(JSON.stringify(resultData));
     }
   }

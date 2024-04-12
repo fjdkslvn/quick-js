@@ -9,10 +9,13 @@ export interface Docs {
 	display_code : string,
 }
 
-export async function getDocsData(id:number): Promise<Docs[]> {
+export async function getDocsData(name:string): Promise<Docs[]> {
 	try {
 		const { rows }: { rows: Docs[] } = await sql
-			`SELECT id, title, description, display_code FROM docs WHERE parent_id = ${id};`;
+			`SELECT d.id, d.title, d.description, d.display_code 
+			FROM docs d
+			JOIN side_submenu s ON d.side_submenu_id = s.id
+			WHERE s.name = ${name} ORDER BY d.index ASC;`;
 		return rows;
 	} catch (error) {
 		throw new Error('Failed to fetch docs data');

@@ -1,10 +1,11 @@
 'use client'
 
 import { useRecoilState } from 'recoil';
-import { dataState } from '@/recoil/atom';
+import { dataSelector } from '@/recoil/atom';
 
-const DataInput: React.FC = () => {
-  const [data, setData] = useRecoilState(dataState);
+const DataInput: React.FC<{ dataType:string}> = ({dataType}) => {
+  const selectedData = dataSelector[dataType as keyof typeof dataSelector]; 
+  const [data, setData] = useRecoilState(selectedData);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setData(e.target.value);

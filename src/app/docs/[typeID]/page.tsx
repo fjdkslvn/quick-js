@@ -11,7 +11,7 @@ const defaultMenu: MenuItem = {
   sub_menus: [],
 };
 
-export default function Page({ params }: { params: { typeID: number } }) {
+export default function Page({ params }: { params: { typeID: string } }) {
 
   const [menu, setMenu] = useState<MenuItem>(defaultMenu);
 
@@ -22,6 +22,7 @@ export default function Page({ params }: { params: { typeID: number } }) {
   const fetchData = async () => {
     try {
       const menuData = await getMenuData(params.typeID);
+      console.log(menuData)
       setMenu(menuData);
     } catch (error) {
       throw new Error('Failed to fetch menu data in /docs/[typeID]');
@@ -30,14 +31,12 @@ export default function Page({ params }: { params: { typeID: number } }) {
 
   return (
     <>
-      <div className="mt-14">
-        <h1 className="text-2xl font-bold mb-2">{menu.name}</h1>
-        <h2 className="mb-8">{menu.description}</h2>
-        <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-          {menu.sub_menus.map((sub_menu) => (
-            <Card key={sub_menu.id} link={sub_menu.link} title={sub_menu.name} description={sub_menu.description}/>
-          ))}
-        </div>
+      <h1 className="text-2xl font-bold mb-2">{menu.name}</h1>
+      <h2 className="mb-8">{menu.description}</h2>
+      <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+        {menu.sub_menus.map((sub_menu) => (
+          <Card key={sub_menu.id} link={sub_menu.link} title={sub_menu.name} description={sub_menu.description}/>
+        ))}
       </div>
     </>
   );

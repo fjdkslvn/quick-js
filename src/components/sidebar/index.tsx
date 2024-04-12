@@ -27,7 +27,7 @@ const Sidebar: React.FC = () => {
         <div key={menu.id}>
           <Link
             href={menu.link}
-            className={pathName === menu.link ? "text-blue-500 font-bold pl-2 h-9 mb-1 flex items-center rounded bg-blue-50" : "text-gray-600 pl-2 h-9 mb-1 flex items-center rounded hover:bg-gray-100"}
+            className={pathName === menu.link ? "text-blue-500 font-bold pl-2 h-9 mb-1 flex items-center rounded bg-blue-50" : "text-gray-600 pl-2 h-9 mb-1 flex items-center rounded hover:bg-gray-100 hover:text-black"}
           >
             {menu.name}
           </Link>
@@ -35,7 +35,7 @@ const Sidebar: React.FC = () => {
               <Link
                 key={sub_menu.id}
                 href={sub_menu.link}
-                className={pathName === sub_menu.link ? "text-blue-500 font-bold pl-2 h-9 ml-3 mb-1 flex items-center rounded bg-blue-50" : "text-gray-600 pl-2 h-9 ml-3 mb-1 flex items-center rounded hover:bg-gray-100"}
+                className={pathName === sub_menu.link ? "text-blue-500 font-bold pl-2 h-9 ml-3 mb-1 flex items-center rounded bg-blue-50" : "text-gray-600 pl-2 h-9 ml-3 mb-1 flex items-center rounded hover:bg-gray-100 hover:text-black"}
               >
                 {sub_menu.name}
               </Link>

@@ -1,7 +1,6 @@
 'use client'
 
 import { RecoilRoot } from 'recoil';
-import DataInput from "@/components/dataInput";
 
 export default function Layout({
   children,
@@ -12,7 +11,6 @@ export default function Layout({
   return (
     <div className="w-full mx-16 my-8">
       <RecoilRoot>
-        <DataInput />
         {children}
       </RecoilRoot>
     </div>

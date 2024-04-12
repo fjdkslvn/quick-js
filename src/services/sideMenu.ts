@@ -25,22 +25,22 @@ export async function getSideMenuData(): Promise<MenuItem[]> {
         m.name,
         m.description,
         m.link,
-        COALESCE(json_agg(json_build_object('id', sub.id, 'name', sub.name, 'description', sub.description, 'link', sub.link)), '[]') AS sub_menus
+        COALESCE(json_agg(json_build_object('id', sub.id, 'name', sub.name, 'description', sub.description, 'link', sub.link) ORDER BY sub.index ASC), '[]') AS sub_menus
       FROM
         side_menu AS m
       LEFT JOIN
-        side_menu AS sub ON m.id = sub.parent_id
-      WHERE
-        m.parent_id IS NULL
+        side_submenu AS sub ON m.id = sub.side_menu_id
       GROUP BY
-        m.id;`;
+        m.id
+      ORDER BY
+        m.id ASC;`;
     return rows;
   } catch (error) {
     throw new Error('Failed to fetch side menu data');
   }
 }
 
-export async function getMenuData(id:number): Promise<MenuItem> {
+export async function getMenuData(name:string): Promise<MenuItem> {
   try {
     const { rows }: { rows: MenuItem[] } = await sql
       `SELECT
@@ -53,13 +53,13 @@ export async function getMenuData(id:number): Promise<MenuItem> {
           'name', sub.name,
           'description', sub.description,
           'link', sub.link
-        )) AS sub_menus
+        ) ORDER BY sub.index ASC) AS sub_menus
       FROM
         side_menu AS m
       LEFT JOIN
-        side_menu AS sub ON m.id = sub.parent_id
+        side_submenu AS sub ON m.id = sub.side_menu_id
       WHERE
-        m.id = ${id}
+        m.name = ${name}
       GROUP BY
         m.id;`;
     return rows[0];
