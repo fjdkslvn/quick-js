@@ -31,7 +31,7 @@ export default function FunctionPage({ params }: { params: { typeID: string, fun
 
   return (
     <>
-      <DataInput dataType={params.typeID} />
+      <DataInput dataType={params.typeID as any} />
       <div>
         {docs.map((docsItem) => (
           <FunctionBlock dataType={params.typeID} key={docsItem.id} id={docsItem.id} title={docsItem.title} description={docsItem.description} displayCode={docsItem.display_code}/>
