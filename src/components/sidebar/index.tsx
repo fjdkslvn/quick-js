@@ -3,8 +3,7 @@
 import { useQuery } from 'react-query';
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from "react";
-import { getSideMenuData, MenuItem } from "@/services/sideMenu";
+import { getSideMenuData } from "@/services/sideMenu";
 
 const Sidebar: React.FC = () => {
   
