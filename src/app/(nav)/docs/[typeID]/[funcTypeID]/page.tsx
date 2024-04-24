@@ -6,21 +6,35 @@ import { RightArrow } from "@public/svgs";
 import FunctionBlock from '@/components/functionBlock';
 import DataInput from "@/components/dataInput";
 import ScrollNav from "@/components/scrollNav";
-import { getDocsData } from '@/services/docs';
+import { getSideToDocs, MenuItem } from "@/services/sideMenu";
+import { Docs } from "@/services/docs";
+import { useEffect, useState } from 'react';
 
 export default function FunctionPage({ params }: { params: { typeID: string, funcTypeID: string } }) {
   
-  const fetchData = async () => {
+  const fetchSideToDocs = async () => {
     try {
-      const docsData = await getDocsData(params.funcTypeID);
-      console.log(docsData);
-      return docsData;
+      const data = await getSideToDocs();
+      return data;
     } catch (error) {
-      throw new Error('Failed to fetch docs data in /docs/[typeID]/[funcTypeID]');
+      throw new Error('Failed to fetch side to docs');
     }
   };
+  
+  const { data: sideToDocs } = useQuery<MenuItem[]>(`sideToDocs`, fetchSideToDocs);
+  const [docs, setDocs] = useState<Docs[]>([]);
 
-  const { data: docs, isLoading, isError } = useQuery(`docs_${params.funcTypeID}`, fetchData);
+  useEffect(() => {
+    if(sideToDocs){
+      const typeIndex = sideToDocs.findIndex(sideInfo => sideInfo.name === params.typeID);
+      if(typeIndex !== -1 && sideToDocs[typeIndex]?.sub_menus){
+        const funcTypeIndex = sideToDocs[typeIndex].sub_menus.findIndex(subInfo => subInfo.name === params.funcTypeID);
+        if(funcTypeIndex !== -1){
+          setDocs(sideToDocs[typeIndex].sub_menus[funcTypeIndex].docs);
+        }
+      }
+    }
+  },[sideToDocs]);
 
   return (
     <div className="flex flex-row w-full">

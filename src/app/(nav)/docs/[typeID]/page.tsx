@@ -2,20 +2,39 @@
 import { useQuery } from 'react-query';
 import Card from '@/components/card';
 import ScrollNav from '@/components/scrollNav';
-import { getMenuData } from '@/services/sideMenu';
+import { getSideToDocs, MenuItem, SubMenuItem } from '@/services/sideMenu';
+import { useEffect, useState } from 'react';
 
 export default function Page({ params }: { params: { typeID: string } }) {
 
-  const fetchData = async () => {
+  const defaultMenu: MenuItem = {
+    id: 0,
+    name: "",
+    description: "",
+    link: "",
+    sub_menus: [],
+  };  
+
+  const fetchSideToDocs = async () => {
     try {
-      const menuData = await getMenuData(params.typeID);
-      return menuData;
+      const data = await getSideToDocs();
+      return data;
     } catch (error) {
-      throw new Error('Failed to fetch menu data in /docs/[typeID]');
+      throw new Error('Failed to fetch side to docs');
     }
   };
 
-  const { data: menu, isLoading, isError } = useQuery(`menu_${params.typeID}`, fetchData);
+  const { data: sideToDocs } = useQuery<MenuItem[]>(`sideToDocs`, fetchSideToDocs);
+  const [menu, setMenu] = useState<MenuItem>(defaultMenu);
+
+  useEffect(() => {
+    if(sideToDocs){
+      const typeIndex = sideToDocs.findIndex(sideInfo => sideInfo.name === params.typeID);
+      if(typeIndex !== -1){
+        setMenu(sideToDocs[typeIndex]);
+      }
+    }
+  },[sideToDocs]);
 
   return (
     <div className="flex flex-row w-full">
