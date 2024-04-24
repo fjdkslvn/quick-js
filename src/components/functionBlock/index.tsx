@@ -8,7 +8,7 @@ const FunctionBlock: React.FC<{ dataType:string, id:number, title: string, descr
   const [result, setResult] = useState('');
 
   return (
-    <div className="mt-14">
+    <div className="pt-16" id={`docs_${id}`}>
       <h1 className="text-2xl font-bold mb-2">{title}</h1>
       <h2 className="mb-3">{description}</h2>
       <CodeBlock dataType={dataType} id={id} displayCode={displayCode} setResult={setResult}/>

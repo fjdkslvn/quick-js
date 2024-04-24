@@ -9,7 +9,7 @@ export default function Layout({
 }){
   
   return (
-    <div className="w-full mx-16 my-8">
+    <div className="w-full">
       <RecoilRoot>
         {children}
       </RecoilRoot>
