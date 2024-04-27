@@ -3,24 +3,24 @@
 import { useQuery } from 'react-query';
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
-import { getSideMenuData } from "@/services/sideMenu";
+import { getSideToDocs } from "@/services/sideMenu";
 
 const Sidebar: React.FC = () => {
-  
-  const fetchData = async () => {
+
+  const fetchSideToDocs = async () => {
     try {
-      const sideMenu = await getSideMenuData();
-      return sideMenu;
+      const data = await getSideToDocs();
+      return data;
     } catch (error) {
-      throw new Error('Failed to fetch side menu data in /components/sidebar');
+      throw new Error('Failed to fetch side to docs');
     }
   };
-  
-  const { data: sideMenu, isLoading, isError } = useQuery(`sideMenu`, fetchData);
+
+  const { data: sideMenu } = useQuery(`sideToDocs`, fetchSideToDocs);
   const pathName = usePathname();
 
   return (
-    <nav className="min-w-56 pl-4 py-4 h-max sticky top-16 hidden md:block">
+    <nav className="min-w-56 px-6 py-4 h-max sticky top-16 hidden md:block">
       {sideMenu?.map((menu) => (
         <div key={`menu_${menu.id}`} className="text-sm">
           <Link

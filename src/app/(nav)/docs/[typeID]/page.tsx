@@ -38,7 +38,7 @@ export default function Page({ params }: { params: { typeID: string } }) {
 
   return (
     <div className="flex flex-row w-full">
-      <div className="w-full mx-16 my-6">
+      <div className="w-full px-8 py-6 md:px-12">
         <div className="text-sm mb-6 text-gray-700">{menu?.name}</div>
         <h1 className="text-3xl font-bold mb-2">{menu?.name}</h1>
         <h2 className="mb-8">{menu?.description}</h2>

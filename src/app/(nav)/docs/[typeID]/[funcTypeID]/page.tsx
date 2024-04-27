@@ -38,7 +38,7 @@ export default function FunctionPage({ params }: { params: { typeID: string, fun
 
   return (
     <div className="flex flex-row w-full">
-      <div className="w-full mx-16 my-6">
+      <div className="w-full px-8 py-6 md:px-12">
         <div className="text-sm mb-8 flex flex-row w-full items-end text-gray-700">
           <Link
             href={`/docs/${params.typeID}`}

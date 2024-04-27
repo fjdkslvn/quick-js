@@ -4,6 +4,9 @@
 .codeHighlight span{
   background: none !important;
 }
+.codeHighlight code{
+  white-space: pre-wrap !important;
+}
 .copyImage:hover path{
   stroke: #579AFF;
 }

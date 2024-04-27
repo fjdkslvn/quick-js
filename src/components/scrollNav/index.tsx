@@ -10,11 +10,12 @@ const ScrollNav: React.FC<{scrollList:any[]}> = ({scrollList}) => {
     }
 
   return (
-      <div className="min-w-56 pr-4 py-6 h-max sticky top-16 hidden xl:block">
+      <div className="min-w-56 px-4 py-6 h-max sticky top-16 hidden xl:block">
         <div className="text-sm font-semibold text-gray-700 mb-6">On this page</div>
         {scrollList.map((scrollInfo) => (
-          <div key={`scrollTitle_${scrollInfo.id}`} className="text-sm font-semibold text-gray-500 mb-3 cursor-pointer hover:text-blue-500" onClick={() => handleClick(scrollInfo.id)}>{scrollInfo.title}</div>
+          <div key={`scrollTitle_${scrollInfo.id}`} className="text-sm font-semibold text-gray-500 pb-3 cursor-pointer hover:text-blue-500" onClick={() => handleClick(scrollInfo.id)}>{scrollInfo.title}</div>
         ))}
+        <div className="w-full h-px bg-gray-200 my-4"></div>
       </div>
   );
 };
