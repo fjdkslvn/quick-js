@@ -5,7 +5,7 @@ import { formatDateDot } from "@/utils/formatDate";
 
 const Card: React.FC<{notice:Notice}> = ({notice}) => {
   return (
-    <div className="w-full border-t pt-8" key={notice.id}>
+    <div className="w-full border-t pt-8">
       <div className="flex flex-row">
         <div className="text-gray-500 mr-16">{formatDateDot(notice.create_date)}</div>
         <div>
