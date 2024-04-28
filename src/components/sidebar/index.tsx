@@ -25,16 +25,16 @@ const Sidebar: React.FC = () => {
         <div key={`menu_${menu.id}`} className="text-sm">
           <Link
             href={menu.link}
-            className={pathName === menu.link ? "text-blue-500 font-bold pl-2 h-9 mb-1 flex items-center rounded bg-blue-50" : "text-gray-500 pl-2 h-9 mb-1 flex items-center rounded hover:bg-gray-100 hover:text-gray-800"}
+            className={pathName === menu.link ? "text-blue-500 font-bold pl-2 h-9 my-1 flex items-center rounded bg-blue-50" : "text-gray-500 pl-2 h-9 my-1 flex items-center rounded hover:bg-gray-100 hover:text-gray-800"}
           >
             {menu.name}
           </Link>
           {menu.sub_menus.map((sub_menu) => (
-              <div className="flex flex-row w-full items-center mb-1" key={`sub_menu_${sub_menu.id}`}>
-                <div className="w-px h-6 mx-3 bg-gray-300"></div>
+              <div className="flex flex-row w-full items-center" key={`sub_menu_${sub_menu.id}`}>
+                <div className="w-px h-10 mx-3 bg-gray-300"></div>
                 <Link
                   href={sub_menu.link}
-                  className={pathName === sub_menu.link ? "w-full text-blue-500 font-bold pl-2 h-9 flex items-center rounded bg-blue-50" : "w-full text-gray-500 pl-2 h-9 flex items-center rounded hover:bg-gray-100 hover:text-gray-800"}
+                  className={pathName === sub_menu.link ? "w-full text-blue-500 font-bold pl-2 h-9 flex items-center rounded bg-blue-50 my-0.5" : "w-full text-gray-500 pl-2 h-9 flex items-center rounded my-0.5 hover:bg-gray-100 hover:text-gray-800"}
                 >
                   {sub_menu.name}
                 </Link>

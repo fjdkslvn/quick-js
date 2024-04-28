@@ -10,7 +10,7 @@ import { getSideToDocs, MenuItem } from "@/services/sideMenu";
 import { Docs } from "@/services/docs";
 import { useEffect, useState } from 'react';
 
-export default function FunctionPage({ params }: { params: { typeID: string, funcTypeID: string } }) {
+export default function Page({ params }: { params: { typeID: string, funcTypeID: string } }) {
   
   const fetchSideToDocs = async () => {
     try {
