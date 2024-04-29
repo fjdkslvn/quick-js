@@ -2,6 +2,7 @@
 
 import Navbar from "@/components/navbar";
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 const queryClient = new QueryClient();
 
@@ -13,8 +14,9 @@ export default function Layout({
   
   return (
     <QueryClientProvider client={queryClient}>
-      <Navbar />
+      <Navbar/>
       {children}
+      <ReactQueryDevtools initialIsOpen={false} position='bottom-right'/>
     </QueryClientProvider>
   )
 }

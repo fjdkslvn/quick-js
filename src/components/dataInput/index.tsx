@@ -13,7 +13,7 @@ const DataInput: React.FC<{ dataType: DataSelectorType }> = ({ dataType }) => {
 
   return (
     <>
-      <textarea className="w-full min-h-24 px-3 py-2 text-sm" value={data} maxLength={1000} placeholder={'데이터를 넣어주세요.'} onChange={handleChange} />
+      <textarea className="w-full min-h-24 px-3 py-2 text-sm dark:bg-backDarkColor" value={data} maxLength={1000} placeholder={'데이터를 넣어주세요.'} onChange={handleChange} />
     </>
   );
 };

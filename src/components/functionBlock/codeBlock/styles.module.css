@@ -7,6 +7,9 @@
 .codeHighlight code{
   white-space: pre-wrap !important;
 }
+.copyImage.dark path{
+  stroke: #ffffff;
+}
 .copyImage:hover path{
   stroke: #579AFF;
 }

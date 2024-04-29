@@ -1,9 +1,9 @@
 'use client'
-import { useQuery } from 'react-query';
 import Card from '@/components/card';
 import ScrollNav from '@/components/scrollNav';
-import { getSideToDocs, MenuItem, SubMenuItem } from '@/services/sideMenu';
+import { MenuItem } from '@/services/sideMenu';
 import { useEffect, useState } from 'react';
+import { useSideToDocs } from '@/hooks/useSideToDocs';
 
 export default function Page({ params }: { params: { typeID: string } }) {
 
@@ -13,18 +13,9 @@ export default function Page({ params }: { params: { typeID: string } }) {
     description: "",
     link: "",
     sub_menus: [],
-  };  
-
-  const fetchSideToDocs = async () => {
-    try {
-      const data = await getSideToDocs();
-      return data;
-    } catch (error) {
-      throw new Error('Failed to fetch side to docs');
-    }
   };
 
-  const { data: sideToDocs } = useQuery<MenuItem[]>(`sideToDocs`, fetchSideToDocs);
+  const { data: sideToDocs } = useSideToDocs();
   const [menu, setMenu] = useState<MenuItem>(defaultMenu);
 
   useEffect(() => {
@@ -39,7 +30,7 @@ export default function Page({ params }: { params: { typeID: string } }) {
   return (
     <div className="flex flex-row w-full">
       <div className="w-full px-8 py-6 md:px-12">
-        <div className="text-sm mb-6 text-gray-700">{menu?.name}</div>
+        <div className="text-sm mb-6 text-gray-600 dark:text-gray-300">{menu?.name}</div>
         <h1 className="text-3xl font-bold mb-2">{menu?.name}</h1>
         <h2 className="mb-8">{menu?.description}</h2>
         <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">

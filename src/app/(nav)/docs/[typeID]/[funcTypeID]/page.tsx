@@ -1,27 +1,17 @@
 'use client'
 
-import { useQuery } from 'react-query';
 import Link from "next/link";
 import { RightArrow } from "@public/svgs";
 import FunctionBlock from '@/components/functionBlock';
 import DataInput from "@/components/dataInput";
 import ScrollNav from "@/components/scrollNav";
-import { getSideToDocs, MenuItem } from "@/services/sideMenu";
 import { Docs } from "@/services/docs";
 import { useEffect, useState } from 'react';
+import { useSideToDocs } from '@/hooks/useSideToDocs';
 
 export default function Page({ params }: { params: { typeID: string, funcTypeID: string } }) {
   
-  const fetchSideToDocs = async () => {
-    try {
-      const data = await getSideToDocs();
-      return data;
-    } catch (error) {
-      throw new Error('Failed to fetch side to docs');
-    }
-  };
-  
-  const { data: sideToDocs } = useQuery<MenuItem[]>(`sideToDocs`, fetchSideToDocs);
+  const { data: sideToDocs } = useSideToDocs();
   const [docs, setDocs] = useState<Docs[]>([]);
 
   useEffect(() => {
@@ -39,10 +29,10 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
   return (
     <div className="flex flex-row w-full">
       <div className="w-full px-8 py-6 md:px-12">
-        <div className="text-sm mb-8 flex flex-row w-full items-end text-gray-700">
+        <div className="text-sm mb-8 flex flex-row w-full items-end text-gray-600 dark:text-gray-300">
           <Link
             href={`/docs/${params.typeID}`}
-            className={"text-gray-400 hover:text-gray-700"}
+            className={"text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"}
           >
             {params.typeID}
           </Link>

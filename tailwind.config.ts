@@ -13,8 +13,13 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        backColor : '#ffffff',
+        backDarkColor : 'rgb(25, 25, 25)',
+      },
     },
   },
+  darkMode: 'class', // 다크 모드를 클래스 기반으로 설정
   plugins: [],
 };
 export default config;

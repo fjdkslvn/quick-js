@@ -15,3 +15,26 @@ textarea{
     border-radius: 4px;
     resize: none;
 }
+
+:root {
+    --color: #000000;
+    --background: #ffffff;
+}
+
+:root.dark {
+    --color: #ffffff;
+    /* --background: rgb(25, 25, 25); */
+    --background: #b82d2d;
+}
+.dark body {
+    background:rgb(25, 25, 25);
+}
+
+.visible-mobile{
+    display: none;
+}
+@media (max-width: 767px) {
+	.visible-mobile{
+        display: block;
+    }
+}
