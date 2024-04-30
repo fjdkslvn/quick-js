@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from 'next/font/google';
 import "@/styles/globals.css";
-import { ThemeProvider } from '@/components/themeProvider';
+import { ThemeProvider } from 'next-themes';
 
 const noto = Noto_Sans_KR({
   subsets: ['latin'], // 또는 preload: false
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning>
       <body className={noto.className}>
-        <ThemeProvider>
+        <ThemeProvider attribute='class'>
           {children}
         </ThemeProvider>
       </body>
