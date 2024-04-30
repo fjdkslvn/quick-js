@@ -1,11 +1,11 @@
 'use client'
 
-import { Notice } from "@/services/notice";
+import { Notice as NoticeType} from "@/services/notice";
 import { formatDateDot } from "@/utils/formatDate";
 
-const Card: React.FC<{notice:Notice}> = ({notice}) => {
+const Notice: React.FC<{notice:NoticeType}> = ({notice}) => {
   return (
-    <div className="w-full border-t pt-8">
+    <div className="w-full border-t pt-8 pb-10">
       <div className="flex flex-row">
         <div className="text-gray-600 mr-16 dark:text-gray-300">{formatDateDot(notice.create_date)}</div>
         <div>
@@ -17,4 +17,4 @@ const Card: React.FC<{notice:Notice}> = ({notice}) => {
   );
 };
 
-export default Card;
+export default Notice;
