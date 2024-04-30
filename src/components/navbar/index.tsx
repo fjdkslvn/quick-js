@@ -2,41 +2,13 @@
 import Link from "next/link";
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import BedtimeIcon from '@mui/icons-material/Bedtime';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import { useTheme } from 'next-themes';
 import { useSideToDocs } from '@/hooks/useSideToDocs';
+import ThemeSeletor from "../themeSeletor";
 
 const Navbar: React.FC = () => {
-
-  // 다크 모드 상태를 저장하는 상태 변수
-  const [darkMode, setDarkMode] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
-      const storedDarkMode = localStorage.getItem('darkMode');
-      return storedDarkMode ? storedDarkMode === 'true' : false;
-    }
-    return false; // 서버 환경에서는 기본적으로 다크 모드를 비활성화
-  });
-  const [loaded, setLoaded] = useState<boolean>(false);
-  const { systemTheme, theme, setTheme } = useTheme();
   const [toggle, setToggle] = useState(false);
-  
-  useEffect(() => {
-    setLoaded(true);
-  },[])
-  useEffect(() => {
-    setTheme(darkMode ? 'dark':'light') //system
-    localStorage.setItem('darkMode', darkMode.toString());
-  }, [darkMode]); // 컴포넌트가 마운트될 때 한 번만 실행됨
-  
-
-  // 다크 모드 상태를 업데이트하는 함수
-  const toggleDarkMode = () => {
-    const newDarkMode = !darkMode;
-    setDarkMode(newDarkMode);
-  };
 
   const handleToggle = () => {
     setToggle(!toggle);
@@ -54,7 +26,7 @@ const Navbar: React.FC = () => {
   const pathName = usePathname();
 
   return (
-    <div className="border-b border-inherit grid place-items-center sticky top-0 bg-backColor z-10 dark:bg-backDarkColor">
+    <div className="border-b border-inherit grid place-items-center sticky top-0 z-10 dark:bg-backDarkColor">
       <nav className="flex flex-row items-center max-w-screen-xl w-full h-16">
         <Link className="ml-6 mr-auto text-base" href="/">QuickJS</Link>
         <div className="hidden md:block">
@@ -66,11 +38,7 @@ const Navbar: React.FC = () => {
           ? <CloseRoundedIcon className="mr-6 cursor-pointer" onClick={handleToggle}/>
           : <MenuRoundedIcon className="mr-6 cursor-pointer" onClick={handleToggle}/>}
         </div>
-        {loaded
-          ?darkMode
-            ? <BedtimeIcon className="mr-6 cursor-pointer" onClick={toggleDarkMode}/>
-            : <LightModeIcon className="mr-6 cursor-pointer" onClick={toggleDarkMode}/>
-          : <div className="w-12 h-12"></div>}
+        <ThemeSeletor/>
       </nav>
       {toggle &&
         <div className="block fixed top-20 px-4 pb-24 bg-backColor w-full h-screen md:hidden dark:bg-backDarkColor">
@@ -88,7 +56,7 @@ const Navbar: React.FC = () => {
                 className={pathName === menu.link
                             ? "text-blue-500 font-bold pl-2 h-9 my-1 flex items-center rounded"
                             : "text-gray-500 pl-2 h-9 my-1 flex items-center rounded hover:bg-gray-100 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-neutral-800"}
-                onClick={toggleDarkMode}
+                onClick={handleToggle}
               >
                 {menu.name}
               </Link>
@@ -100,7 +68,7 @@ const Navbar: React.FC = () => {
                       className={pathName === sub_menu.link
                                   ? "w-full text-blue-500 font-bold pl-2 h-9 flex items-center rounded my-0.5"
                                   : "w-full text-gray-500 pl-2 h-9 flex items-center rounded my-0.5 hover:bg-gray-100 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-neutral-800"}
-                      onClick={toggleDarkMode}
+                      onClick={handleToggle}
                     >
                       {sub_menu.name}
                     </Link>
