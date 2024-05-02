@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
-import { useSideToDocs } from '@/hooks/useSideToDocs';
-import { MenuItem } from '@/services/sideMenu';
+import { useFetchSideMenu } from '@/hooks/useFetchSideMenu';
 
 const Sidebar: React.FC = () => {
-  const { data:sideMenuData } = useSideToDocs();
+  const { data:sideMenuData } = useFetchSideMenu();
   const pathName = usePathname();
 
   return (
@@ -19,7 +18,7 @@ const Sidebar: React.FC = () => {
           >
             {menu.name}
           </Link>
-          {menu.sub_menus.map((sub_menu) => (
+          {menu.side_submenu.map((sub_menu) => (
               <div className="flex flex-row w-full items-center" key={`sub_menu_${sub_menu.id}`}>
                 <div className="w-px h-10 mx-3 bg-gray-300 dark:bg-gray-600"></div>
                 <Link

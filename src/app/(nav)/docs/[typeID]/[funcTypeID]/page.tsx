@@ -5,22 +5,22 @@ import { RightArrow } from "@public/svgs";
 import FunctionBlock from '@/components/functionBlock';
 import DataInput from "@/components/dataInput";
 import ScrollNav from "@/components/scrollNav";
-import { Docs } from "@/services/docs";
 import { useEffect, useState } from 'react';
-import { useSideToDocs } from '@/hooks/useSideToDocs';
+import { useFetchSideMenu } from '@/hooks/useFetchSideMenu';
+import { side_menu, side_submenu, docs } from '@prisma/client';
 
 export default function Page({ params }: { params: { typeID: string, funcTypeID: string } }) {
   
-  const { data: sideToDocs } = useSideToDocs();
-  const [docs, setDocs] = useState<Docs[]>([]);
+  const { data: sideToDocs } = useFetchSideMenu();
+  const [docs, setDocs] = useState<docs[] | null>(null);
 
   useEffect(() => {
     if(sideToDocs){
       const typeIndex = sideToDocs.findIndex(sideInfo => sideInfo.name === params.typeID);
-      if(typeIndex !== -1 && sideToDocs[typeIndex]?.sub_menus){
-        const funcTypeIndex = sideToDocs[typeIndex].sub_menus.findIndex(subInfo => subInfo.name === params.funcTypeID);
+      if(typeIndex !== -1 && sideToDocs[typeIndex]?.side_submenu){
+        const funcTypeIndex = sideToDocs[typeIndex].side_submenu.findIndex(subInfo => subInfo.name === params.funcTypeID);
         if(funcTypeIndex !== -1){
-          setDocs(sideToDocs[typeIndex].sub_menus[funcTypeIndex].docs);
+          setDocs(sideToDocs[typeIndex].side_submenu[funcTypeIndex].docs);
         }
       }
     }

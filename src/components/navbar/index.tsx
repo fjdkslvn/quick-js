@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import { useSideToDocs } from '@/hooks/useSideToDocs';
+import { useFetchSideMenu } from '@/hooks/useFetchSideMenu';
 import ThemeSeletor from "../themeSeletor";
 
 const Navbar: React.FC = () => {
@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
     }
   }, [toggle]);
   
-  const { data: sideMenu } = useSideToDocs();
+  const { data: sideMenu } = useFetchSideMenu();
   const pathName = usePathname();
 
   return (
@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
               >
                 {menu.name}
               </Link>
-              {menu.sub_menus.map((sub_menu) => (
+              {menu.side_submenu.map((sub_menu) => (
                   <div className="flex flex-row w-full items-center" key={`sub_menu_${sub_menu.id}`}>
                     <div className="w-px h-10 mx-3 bg-gray-300 dark:bg-gray-600"></div>
                     <Link

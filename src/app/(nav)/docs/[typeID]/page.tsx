@@ -1,28 +1,23 @@
 'use client'
 import Card from '@/components/card';
 import ScrollNav from '@/components/scrollNav';
-import { MenuItem } from '@/services/sideMenu';
 import { useEffect, useState } from 'react';
-import { useSideToDocs } from '@/hooks/useSideToDocs';
+import { useFetchSideMenu } from '@/hooks/useFetchSideMenu';
+import { side_menu, side_submenu } from '@prisma/client';
 
 export default function Page({ params }: { params: { typeID: string } }) {
 
-  const defaultMenu: MenuItem = {
-    id: 0,
-    name: "",
-    description: "",
-    link: "",
-    sub_menus: [],
-  };
 
-  const { data: sideToDocs } = useSideToDocs();
-  const [menu, setMenu] = useState<MenuItem>(defaultMenu);
+  const { data: sideToDocs } = useFetchSideMenu();
+  const [menu, setMenu] = useState<side_menu | null>(null);
+  const [subMenu, setSubMenu] = useState<side_submenu[] | null>(null);
 
   useEffect(() => {
     if(sideToDocs){
       const typeIndex = sideToDocs.findIndex(sideInfo => sideInfo.name === params.typeID);
       if(typeIndex !== -1){
         setMenu(sideToDocs[typeIndex]);
+        setSubMenu(sideToDocs[typeIndex].side_submenu);
       }
     }
   },[sideToDocs]);
@@ -34,7 +29,7 @@ export default function Page({ params }: { params: { typeID: string } }) {
         <h1 className="text-3xl font-bold mb-2">{menu?.name}</h1>
         <h2 className="mb-8">{menu?.description}</h2>
         <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-          {menu?.sub_menus.map((sub_menu) => (
+          {subMenu?.map((sub_menu) => (
             <Card key={sub_menu.id} link={sub_menu.link} title={sub_menu.name} description={sub_menu.description}/>
           ))}
         </div>

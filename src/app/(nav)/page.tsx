@@ -1,6 +1,9 @@
+'use client'
+
 import Link from "next/link";
 
 export default function Home() {
+
   return (
     <div className="grid place-items-center">
       <div className="max-w-screen-xl w-full grid place-items-center p-10">

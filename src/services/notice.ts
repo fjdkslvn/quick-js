@@ -1,20 +1,15 @@
 'use server'
+import { PrismaClient } from '@prisma/client';
 
-import { sql } from "@vercel/postgres";
+const prisma = new PrismaClient();
 
-export interface Notice {
-    id: number;
-    title: string;
-    content: string;
-    create_date: Date;
-}
-
-export async function getNoticeList(): Promise<Notice[]> {
-	try {
-		const { rows }: { rows: Notice[] } = await sql
-			`SELECT id, title, content, create_date FROM notice ORDER BY create_date DESC;`;
-		return rows;
-	} catch (error) {
-		throw new Error('Failed to fetch notice list');
-	}
+export async function getAllNotice() {
+  try {
+    const data = await prisma.notice.findMany();
+    return data;
+  } catch (error) {
+    throw new Error(`Error getting all notice`);
+  } finally {
+    await prisma.$disconnect();
+  }
 }

@@ -1,14 +1,14 @@
 'use client'
 
 import Notice from '@/components/notice';
-import { getNoticeList } from '@/services/notice';
+import { getAllNotice } from '@/services/notice';
 import { useQuery } from 'react-query';
 
 export default function Page() {
 
   const fetchNoticeList = async () => {
     try {
-      const data = await getNoticeList();
+      const data = await getAllNotice();
       return data;
     } catch (error) {
       throw new Error('Failed to fetch notice list');

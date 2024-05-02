@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model docs {
+  id              Int          @id @default(autoincrement())
+  side_submenu_id Int
+  title           String       @db.VarChar(255)
+  description     String       @db.Text
+  display_code    String       @db.Text
+  side_submenu    side_submenu @relation(fields: [side_submenu_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "docs_ibfk_1")
+
+  @@index([side_submenu_id], map: "side_submenu_id")
+}
+
+model notice {
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(255)
+  content     String    @db.Text
+  create_date DateTime? @default(now()) @db.Timestamp(0)
+}
+
+model side_menu {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
+  description  String         @db.Text
+  link         String         @db.VarChar(255)
+  side_submenu side_submenu[]
+}
+
+model side_submenu {
+  id           Int       @id @default(autoincrement())
+  side_menu_id Int
+  name         String    @db.VarChar(255)
+  description  String    @db.Text
+  link         String    @db.VarChar(255)
+  docs         docs[]
+  side_menu    side_menu @relation(fields: [side_menu_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "side_submenu_ibfk_1")
+
+  @@index([side_menu_id], map: "side_menu_id")
+}
