@@ -7,7 +7,7 @@ import DataInput from "@/components/dataInput";
 import ScrollNav from "@/components/scrollNav";
 import { useEffect, useState } from 'react';
 import { useFetchSideMenu } from '@/hooks/useFetchSideMenu';
-import { side_menu, side_submenu, docs } from '@prisma/client';
+import { docs } from '@prisma/client';
 
 export default function Page({ params }: { params: { typeID: string, funcTypeID: string } }) {
   
