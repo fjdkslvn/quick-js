@@ -1,12 +1,43 @@
 import { useQuery } from 'react-query';
-import { getAllSideMenus } from "@/services/sideMenu";
+
+interface SideMenu {
+  id: number;
+  name: string;
+  description: string;
+  link: string;
+  side_submenu: SideSubMenu[]; // 사이드 서브메뉴를 포함
+}
+
+interface SideSubMenu {
+  id: number;
+  side_menu_id: number;
+  name: string;
+  description: string;
+  link: string;
+  docs: Docs[]; // 문서를 포함
+}
+
+interface Docs {
+  id: number;
+  side_submenu_id: number;
+  title: string;
+  description: string;
+  display_code: string;
+}
 
 export const useFetchSideMenu = () => {
-  return useQuery(["sideToDocs"], ()=> getAllSideMenus(), {
-    staleTime: 600000, // 데이터가 10분 동안 캐시됨
-    cacheTime: 600000, // 데이터가 캐시에 유지되는 시간: 10분
-    refetchOnMount: false, // 컴포넌트 마운트 시에는 데이터를 다시 불러오지 않음
-    refetchOnWindowFocus: false, // 창 포커스 시에는 데이터를 다시 불러오지 않음
-    refetchInterval: false // 주기적으로 데이터를 다시 불러오지 않음
+  return useQuery<SideMenu[], Error>(["sideToDocs"], async () => {
+    const response = await fetch('/api/sideMenu');
+    if (!response.ok) {
+      throw new Error('Failed to fetch side menu');
+    }
+    const data = await response.json();
+    return data as SideMenu[];
+  }, {
+    staleTime: 600000,
+    cacheTime: 600000,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchInterval: false
   });
 };
