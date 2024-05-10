@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
   const pathName = usePathname();
 
   return (
-    <div className="border-b border-inherit grid place-items-center sticky top-0 z-10 dark:bg-backDarkColor">
+    <div className="border-b border-inherit grid place-items-center sticky top-0 z-10 bg-white dark:bg-backDarkColor">
       <nav className="flex flex-row items-center max-w-screen-xl w-full h-16">
         <Link className="ml-6 mr-auto text-base" href="/">QuickJS</Link>
         <div className="hidden md:block">
