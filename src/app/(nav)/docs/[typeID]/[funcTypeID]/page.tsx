@@ -5,6 +5,9 @@ import { RightArrow } from "@public/svgs";
 import FunctionBlock from '@/components/functionBlock';
 import DataInput from "@/components/dataInput";
 import ScrollNav from "@/components/scrollNav";
+import { useRecoilState, RecoilState } from 'recoil';
+import { dataSelector } from '@/recoil/atom';
+import { functionData } from '@/constants/fucntionData';
 import { useEffect, useState } from 'react';
 import { useFetchSideMenu } from '@/hooks/useFetchSideMenu';
 import { docs } from '@prisma/client';
@@ -13,6 +16,9 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
   
   const { data: sideToDocs } = useFetchSideMenu();
   const [docs, setDocs] = useState<docs[] | null>(null);
+  const [resultList, setResultList] = useState<string[]>([]);
+  const selectedData = dataSelector[params.typeID as keyof typeof dataSelector] as RecoilState<string>; // 타입 명시
+  const [data, setData] = useRecoilState<string>(selectedData); // 제네릭 타입 명시
 
   useEffect(() => {
     if(sideToDocs){
@@ -25,6 +31,22 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
       }
     }
   },[sideToDocs]);
+
+  useEffect(() => {
+    createResult(); // 기본 결과값 채우기
+  }, [docs]);
+
+  const createResult = () => {
+    if(docs && data){
+      let newResultList: string[] = [];
+      docs.map((docsInfo:docs) => {
+        const useData = params.typeID === 'string' ? data : eval('(' + data + ')');
+        const resultData = functionData[`func${docsInfo.id}`](useData);
+        newResultList.push(JSON.stringify(resultData));
+      });
+      setResultList(newResultList);
+    }
+  }
 
   return (
     <div className="flex flex-row w-full">
@@ -40,9 +62,10 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
           <p>{params.funcTypeID}</p>
         </div>
         <DataInput dataType={params.typeID as any} />
+        <button className="block text-base mx-auto my-1 bg-blue-200 px-10 w-full h-12 rounded-lg text-gray-700 hover:bg-blue-300" onClick={createResult}>실행</button>
         <div>
-          {docs?.map((docsItem) => (
-            <FunctionBlock dataType={params.typeID} key={docsItem.id} id={docsItem.id} title={docsItem.title} description={docsItem.description} displayCode={docsItem.display_code}/>
+          {docs?.map((docsItem, idx) => (
+            <FunctionBlock key={docsItem.id} id={docsItem.id} title={docsItem.title} description={docsItem.description} displayCode={docsItem.display_code} result={resultList[idx]}/>
           ))}
         </div>
       </div>

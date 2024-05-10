@@ -4,14 +4,13 @@ import CodeBlock from "@/components/functionBlock/codeBlock";
 import ResultBlock from "@/components/functionBlock/resultBlock";
 import { useState } from "react";
 
-const FunctionBlock: React.FC<{ dataType:string, id:number, title: string, description: string, displayCode: string}> = ({dataType, id, title, description, displayCode}) => {
-  const [result, setResult] = useState('');
+const FunctionBlock: React.FC<{ id:number, title: string, description: string, displayCode: string, result: string }> = ({ id, title, description, displayCode, result}) => {
 
   return (
     <div className="pt-16" id={`docs_${id}`}>
       <h1 className="text-2xl font-bold mb-2">{title}</h1>
       <h2 className="mb-3">{description}</h2>
-      <CodeBlock dataType={dataType} id={id} displayCode={displayCode} setResult={setResult}/>
+      <CodeBlock displayCode={displayCode}/>
       <ResultBlock resultData={result}/>
     </div>
   );
