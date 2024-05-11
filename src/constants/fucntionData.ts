@@ -21,4 +21,7 @@ export const functionData: FuncData = {
   func13: (data: any) => { return data.trim() },
   func14: (data: any) => { return data.trimLeft() },
   func15: (data: any) => { return data.trimRight() },
+  func16: (data: any) => { return Object.keys(data) },
+  func17: (data: any) => { return Object.values(data) },
+  func18: (data: any) => { return Object.entries(data) },
 };
