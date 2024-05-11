@@ -6,15 +6,15 @@ import FunctionBlock from '@/components/functionBlock';
 import DataInput from "@/components/dataInput";
 import ScrollNav from "@/components/scrollNav";
 import { useRecoilState, RecoilState } from 'recoil';
-import { dataSelector } from '@/recoil/atom';
+import { SideMenu, sideMenuData, dataSelector } from '@/recoil/atom';
 import { functionData } from '@/constants/fucntionData';
 import { useEffect, useState } from 'react';
-import { useFetchSideMenu } from '@/hooks/useFetchSideMenu';
+
 import { docs } from '@prisma/client';
 
 export default function Page({ params }: { params: { typeID: string, funcTypeID: string } }) {
   
-  const { data: sideToDocs } = useFetchSideMenu();
+  const [sideToDocs, setSideToDocs] = useRecoilState<SideMenu[]>(sideMenuData);
   const [docs, setDocs] = useState<docs[] | null>(null);
   const [resultList, setResultList] = useState<string[]>([]);
   const selectedData = dataSelector[params.typeID as keyof typeof dataSelector] as RecoilState<string>; // 타입 명시

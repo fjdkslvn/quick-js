@@ -1,5 +1,8 @@
 // 날짜를 yyyy.MM.dd 형식으로 포맷하는 함수
 export function formatDateDot(date: Date): string {
+  if(typeof date === 'string'){
+    date = new Date(date);
+  }
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
@@ -8,6 +11,9 @@ export function formatDateDot(date: Date): string {
   
 // 날짜를 MM/dd/yyyy 형식으로 포맷하는 함수
 export function formatDateSlash(date: Date): string {
+  if(typeof date === 'string'){
+    date = new Date(date);
+  }
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
   const year = date.getFullYear();
@@ -16,6 +22,9 @@ export function formatDateSlash(date: Date): string {
   
 // 날짜를 dd/MM/yyyy 형식으로 포맷하는 함수
 export function formatDateSlashReverse(date: Date): string {
+  if(typeof date === 'string'){
+    date = new Date(date);
+  }
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();

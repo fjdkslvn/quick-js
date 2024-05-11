@@ -1,14 +1,17 @@
+'use client'
+
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
-import { useFetchSideMenu } from '@/hooks/useFetchSideMenu';
+import { useRecoilState } from 'recoil';
+import { SideMenu, sideMenuData } from '@/recoil/atom';
 
 const Sidebar: React.FC = () => {
-  const { data:sideMenuData } = useFetchSideMenu();
+  const [sideMenu, setSideMenu] = useRecoilState<SideMenu[]>(sideMenuData);
   const pathName = usePathname();
 
   return (
     <nav className="min-w-56 px-6 py-4 h-max sticky top-16 hidden md:block">
-      {sideMenuData?.map((menu) => (
+      {sideMenu?.map((menu) => (
         <div key={`menu_${menu.id}`} className="text-sm">
           <Link
             href={menu.link}

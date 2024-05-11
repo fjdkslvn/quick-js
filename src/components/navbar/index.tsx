@@ -4,15 +4,21 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import { useFetchSideMenu } from '@/hooks/useFetchSideMenu';
 import ThemeSeletor from "../themeSeletor";
+import { useRecoilState } from 'recoil';
+import { SideMenu, sideMenuData } from '@/recoil/atom';
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
+  const [sideMenu, setSideMenu] = useRecoilState<SideMenu[]>(sideMenuData);
   const [toggle, setToggle] = useState(false);
 
   const handleToggle = () => {
     setToggle(!toggle);
   }
+
+  useEffect(() => {
+    setSideMenu(sideMenuList);
+  },[]);
 
   useEffect(() => {
     if (toggle) {
@@ -21,8 +27,7 @@ const Navbar: React.FC = () => {
       document.body.style.overflow = 'auto'; // 스크롤 허용
     }
   }, [toggle]);
-  
-  const { data: sideMenu } = useFetchSideMenu();
+
   const pathName = usePathname();
 
   return (

@@ -2,13 +2,14 @@
 import Card from '@/components/card';
 import ScrollNav from '@/components/scrollNav';
 import { useEffect, useState } from 'react';
-import { useFetchSideMenu } from '@/hooks/useFetchSideMenu';
+import { useRecoilState } from 'recoil';
+import { SideMenu, sideMenuData } from '@/recoil/atom';
 import { side_menu, side_submenu } from '@prisma/client';
 
 export default function Page({ params }: { params: { typeID: string } }) {
 
 
-  const { data: sideToDocs } = useFetchSideMenu();
+  const [sideToDocs, setSideToDocs] = useRecoilState<SideMenu[]>(sideMenuData);
   const [menu, setMenu] = useState<side_menu | null>(null);
   const [subMenu, setSubMenu] = useState<side_submenu[] | null>(null);
 

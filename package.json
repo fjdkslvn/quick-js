@@ -18,7 +18,6 @@
     "prisma": "^5.13.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-query": "^3.39.3",
     "react-syntax-highlighter": "^15.5.0",
     "recoil": "^0.7.7"
   },
