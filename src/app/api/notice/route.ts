@@ -10,7 +10,6 @@ export async function GET(request: NextRequest) {
           create_date: 'desc'
         }
       });
-      console.log(data);
     return NextResponse.json(data);
   } catch (error) {
     console.error('Error getting notice:', error);

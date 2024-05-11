@@ -14,7 +14,6 @@ export async function GET(request: NextRequest) {
         }
       }
     });
-    console.log(data);
     return NextResponse.json(data);
   } catch (error) {
     console.error('Error getting side menus:', error);
