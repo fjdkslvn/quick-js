@@ -31,7 +31,7 @@ const Navbar: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
   const pathName = usePathname();
 
   return (
-    <div className="border-b border-inherit grid place-items-center sticky top-0 z-10 bg-white dark:bg-backDarkColor">
+    <div className="border-b border-zinc-200 grid place-items-center sticky top-0 z-10 bg-white dark:bg-backDarkColor dark:border-zinc-700">
       <nav className="flex flex-row items-center max-w-screen-xl w-full h-16">
         <Link className="ml-6 mr-auto text-base" href="/">QuickJS</Link>
         <div className="hidden md:block">
@@ -46,7 +46,7 @@ const Navbar: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
         <ThemeSeletor/>
       </nav>
       {toggle &&
-        <div className="block fixed top-20 px-4 pb-24 bg-backColor w-full h-screen md:hidden dark:bg-backDarkColor">
+        <div className="block fixed top-16 px-4 pb-24 bg-backColor border-t border-zinc-200 w-full h-screen md:hidden dark:bg-backDarkColor dark:border-zinc-700">
           <div>
             <Link className="text-sm text-gray-500 pl-2 h-9 my-1 flex items-center rounded hover:bg-gray-100 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-neutral-800" href="/docs/string" onClick={handleToggle}>작업실</Link>
           </div>

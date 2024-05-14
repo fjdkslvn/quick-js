@@ -46,7 +46,6 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
         }
       }
     }
-    console.log(sideToDocs);
   },[sideToDocs]);
 
   useEffect(() => {
