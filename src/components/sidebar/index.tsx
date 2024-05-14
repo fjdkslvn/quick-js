@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import { useRecoilState } from 'recoil';
-import { SideMenu, sideMenuData } from '@/recoil/atom';
+import { SideMenu, sideMenuData } from '@/recoil/sideMenuAtom';
 
 const Sidebar: React.FC = () => {
   const [sideMenu, setSideMenu] = useRecoilState<SideMenu[]>(sideMenuData);

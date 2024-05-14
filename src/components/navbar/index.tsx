@@ -6,7 +6,7 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ThemeSeletor from "../themeSeletor";
 import { useRecoilState } from 'recoil';
-import { SideMenu, sideMenuData } from '@/recoil/atom';
+import { SideMenu, sideMenuData } from '@/recoil/sideMenuAtom';
 
 const Navbar: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
   const [sideMenu, setSideMenu] = useRecoilState<SideMenu[]>(sideMenuData);

@@ -1,5 +1,5 @@
 import { useRecoilState, RecoilState } from 'recoil';
-import { dataSelector } from '@/recoil/atom';
+import { dataSelector } from '@/recoil/funcDataAtom';
 
 type DataSelectorType = keyof typeof dataSelector;
 

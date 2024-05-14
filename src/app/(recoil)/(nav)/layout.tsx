@@ -1,5 +1,5 @@
 import Navbar from "@/components/navbar";
-import { SideMenu } from '@/recoil/atom';
+import { SideMenu } from '@/recoil/sideMenuAtom';
 
 export default async function Layout({
   children,
