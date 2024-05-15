@@ -44,7 +44,7 @@ const Sidebar: React.FC = () => {
           onClick={() => toggleMenu(menu.id, menu.link)}
             href={menu.link}
             className={pathName === menu.link
-                        ? "flex justify-between text-blue-500 font-bold pl-2 pr-1 h-9 my-1 flex items-center rounded"
+                        ? "flex justify-between text-blue-500 font-bold pl-2 pr-1 h-9 my-1 flex items-center rounded hover:bg-gray-100 dark:hover:bg-neutral-800"
                         : "flex justify-between text-gray-500 pl-2 pr-1 h-9 my-1 flex items-center rounded hover:bg-gray-100 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-neutral-800"}
           >
             {menu.name}
