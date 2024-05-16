@@ -28,7 +28,7 @@ const Navbar: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
   }
 
   return (
-    <div className="border-b border-zinc-200 grid place-items-center sticky top-0 z-10 bg-white dark:bg-backDarkColor dark:border-zinc-700">
+    <div className="border-b border-zinc-200 grid place-items-center sticky top-0 z-10 backdrop-filter-blur-8 bg-white bg-opacity-85 dark:bg-opacity-85 dark:bg-backDarkColor dark:border-zinc-700">
       <nav className="flex flex-row items-center max-w-screen-xl w-full h-16">
         <Link className="ml-6 mr-auto text-base" href="/">QuickJS</Link>
         <div className="hidden md:block">

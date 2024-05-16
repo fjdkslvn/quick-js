@@ -38,3 +38,7 @@ textarea{
         display: block;
     }
 }
+
+.backdrop-filter-blur-8 {
+    backdrop-filter: blur(8px);
+}
