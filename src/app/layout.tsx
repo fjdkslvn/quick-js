@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_KR } from 'next/font/google';
 import "@/styles/globals.css";
 import { ThemeProvider } from 'next-themes';
+import AuthProvider from '@/components/providers/authProvider'
 
 const noto = Noto_Sans_KR({
   subsets: ['latin'], // 또는 preload: false
@@ -22,7 +23,9 @@ export default function RootLayout({
     <html suppressHydrationWarning>
       <body className={noto.className}>
         <ThemeProvider attribute='class'>
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
