@@ -6,9 +6,9 @@ const Card: React.FC<{link:string, title:string, description: string}> = ({link,
 
   return (
     <Link href={link}>
-      <div className="bg-sky-100 p-4 min-h-48 rounded-2xl shadow-md hover:bg-sky-50 dark:bg-gray-600 dark:hover:bg-gray-500">
-        <div className="mb-3 text-lg">{title}</div>
-        <div>{description}</div>
+      <div className="text-gray-800 dark:text-gray-200 transition duration-300 ease-in-out p-4 min-h-40 rounded-2xl shadow-md border border-zinc-200 hover:border-zinc-500 dark:border-zinc-600 dark:hover:border-zinc-300">
+        <div className="mb-3 text-lg font-medium">{title}</div>
+        <div className="text-sm">{description}</div>
       </div>
     </Link>
   );
