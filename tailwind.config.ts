@@ -15,7 +15,7 @@ const config: Config = {
       },
       colors: {
         backColor : '#ffffff',
-        backDarkColor : 'rgb(25, 25, 25)',
+        backDarkColor : 'rgb(17, 17, 17)',
       },
     },
   },

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from 'react';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import GitHubIcon from '@mui/icons-material/GitHub';
 import ThemeSeletor from "../themeSeletor";
 import { useRecoilState } from 'recoil';
 import { SideMenu, sideMenuData } from '@/recoil/sideMenuAtom';
@@ -30,17 +31,18 @@ const Navbar: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
   return (
     <div className="border-b border-zinc-200 grid place-items-center sticky top-0 z-10 backdrop-filter-blur-8 bg-white bg-opacity-85 dark:bg-opacity-85 dark:bg-backDarkColor dark:border-zinc-700">
       <nav className="flex flex-row items-center max-w-screen-xl w-full h-16">
-        <Link className="ml-6 mr-auto text-base" href="/">QuickJS</Link>
-        <div className="hidden md:block">
-          <Link className="mr-6 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100" href="/docs/string">작업실</Link>
-          <Link className="mr-6 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100" href="/notice">공지사항</Link>
+        <Link className="ml-6 mr-10 text-lg font-medium" href="/">QuickJS</Link>
+        <div className="hidden mr-auto md:block">
+          <Link className="mr-6 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white" href="/docs/string">작업실</Link>
+          <Link className="mr-6 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white" href="/notice">공지사항</Link>
         </div>
+        <ThemeSeletor/>
+        <Link className="mr-6" href="https://github.com/fjdkslvn/quick-js" target="_blank"><GitHubIcon/></Link>
         <div className="visible-mobile">
           {toggle
           ? <CloseRoundedIcon className="mr-6 cursor-pointer" onClick={handleToggle}/>
           : <MenuRoundedIcon className="mr-6 cursor-pointer" onClick={handleToggle}/>}
         </div>
-        <ThemeSeletor/>
       </nav>
       {toggle &&
         <div className="block fixed top-16 px-4 pb-24 bg-backColor border-t border-zinc-200 w-full h-screen md:hidden dark:bg-backDarkColor dark:border-zinc-700">
