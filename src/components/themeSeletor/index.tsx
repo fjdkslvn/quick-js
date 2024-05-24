@@ -43,7 +43,7 @@ const ThemeSelector: React.FC = () => {
   }, [themeToggle]);
 
   return (
-    <div className="relative ml-auto">
+    <div className="relative">
         <div className="mr-6 cursor-pointer" onClick={themeShowToggle}>
           {themeState === 'light'
             ? <LightModeOutlinedIcon id="theme_light"/>
