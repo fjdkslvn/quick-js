@@ -8,7 +8,7 @@ export interface SideMenu {
   side_submenu: SideSubMenu[]; // 사이드 서브메뉴를 포함
 }
 
-interface SideSubMenu {
+export interface SideSubMenu {
   id: number;
   side_menu_id: number;
   name: string;

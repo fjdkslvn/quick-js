@@ -12,7 +12,6 @@ import { functionData } from '@/constants/fucntionData';
 import { SideMenu, sideMenuData } from '@/recoil/sideMenuAtom';
 import { PageNav as PageNavType, PageNavData } from '@/recoil/pageNavAtom';
 import { useEffect, useState } from 'react';
-
 import { docs } from '@prisma/client';
 
 export default function Page({ params }: { params: { typeID: string, funcTypeID: string } }) {

@@ -72,6 +72,7 @@ CREATE TABLE `accounts` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
+    INDEX `accounts_user_id_fkey`(`user_id`),
     UNIQUE INDEX `accounts_provider_provider_account_id_key`(`provider`, `provider_account_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -87,6 +88,7 @@ CREATE TABLE `sessions` (
     `updatedAt` DATETIME(3) NOT NULL,
 
     UNIQUE INDEX `sessions_session_token_key`(`session_token`),
+    INDEX `sessions_user_id_fkey`(`user_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -104,6 +106,15 @@ CREATE TABLE `VerificationRequest` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `favorites` (
+    `user_id` VARCHAR(191) NOT NULL,
+    `docs_id` INTEGER NOT NULL,
+
+    INDEX `docs_id`(`docs_id`),
+    PRIMARY KEY (`user_id`, `docs_id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `docs` ADD CONSTRAINT `docs_ibfk_1` FOREIGN KEY (`side_submenu_id`) REFERENCES `side_submenu`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -115,4 +126,10 @@ ALTER TABLE `accounts` ADD CONSTRAINT `accounts_user_id_fkey` FOREIGN KEY (`user
 
 -- AddForeignKey
 ALTER TABLE `sessions` ADD CONSTRAINT `sessions_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `favorites` ADD CONSTRAINT `favorites_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE `favorites` ADD CONSTRAINT `favorites_ibfk_2` FOREIGN KEY (`docs_id`) REFERENCES `docs`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 

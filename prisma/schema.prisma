@@ -14,6 +14,7 @@ model docs {
   description     String       @db.Text
   display_code    String       @db.Text
   side_submenu    side_submenu @relation(fields: [side_submenu_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "docs_ibfk_1")
+  favorites       favorites[]
 
   @@index([side_submenu_id], map: "side_submenu_id")
 }
@@ -46,47 +47,52 @@ model side_submenu {
 }
 
 model User {
-  id                    String     @id @default(uuid())
-  name                  String
-  email                 String?    @unique
-  emailVerified         DateTime?   @map("email_verified")
-  image                 String?
-  createdAt             DateTime   @default(now())
-  updatedAt             DateTime   @updatedAt
-  accounts              Account[]
-  sessions              Session[]
+  id            String      @id @default(uuid())
+  name          String
+  email         String?     @unique
+  emailVerified DateTime?   @map("email_verified")
+  image         String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  accounts      Account[]
+  favorites     favorites[]
+  sessions      Session[]
+
   @@map("users")
 }
+
 model Account {
-  id                 String    @id @default(cuid())
-  userId              String    @map("user_id")
-  type                 String?
-  provider           String
-  providerAccountId  String    @map("provider_account_id")
-  token_type         String?
-  refresh_token      String?   @db.Text
-  access_token       String?   @db.Text
-  expires_at         Int?
-  scope              String?
-  id_token           String? @db.Text
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
-  user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String   @id @default(cuid())
+  userId            String   @map("user_id")
+  type              String?
+  provider          String
+  providerAccountId String   @map("provider_account_id")
+  token_type        String?
+  refresh_token     String?  @db.Text
+  access_token      String?  @db.Text
+  expires_at        Int?
+  scope             String?
+  id_token          String?  @db.Text
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId], map: "accounts_user_id_fkey")
   @@map("accounts")
 }
 
 model Session {
   id           String   @id @default(cuid())
   userId       String?  @map("user_id")
-  sessionToken String   @unique @map("session_token") @db.VarChar(191)
-  accessToken  String?  @db.Text @map("access_token")
+  sessionToken String   @unique @map("session_token")
+  accessToken  String?  @map("access_token") @db.Text
   expires      DateTime
-  user         User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  user         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@index([userId], map: "sessions_user_id_fkey")
   @@map("sessions")
 }
 
@@ -99,4 +105,14 @@ model VerificationRequest {
   updatedAt  DateTime @updatedAt
 
   @@unique([identifier, token])
+}
+
+model favorites {
+  user_id String
+  docs_id Int
+  users   User   @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "favorites_ibfk_1")
+  docs    docs   @relation(fields: [docs_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "favorites_ibfk_2")
+
+  @@id([user_id, docs_id])
+  @@index([docs_id], map: "docs_id")
 }
