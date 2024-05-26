@@ -6,7 +6,8 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import ThemeSeletor from "../themeSeletor";
 import { useRecoilState } from 'recoil';
-import { SideMenu, sideMenuData } from '@/recoil/sideMenuAtom';
+import { sideMenuData } from '@/recoil/sideMenuAtom';
+import { SideMenu } from 'sideMenuType';
 import { useSession, signIn, signOut } from "next-auth/react"
 
 const Navbar: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
@@ -18,11 +19,11 @@ const Navbar: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
     setSideMenu(sideMenuList);
   },[]);
 
-useEffect(() => {
-  console.log(session?.user?.id);
-  console.log(session?.user?.name);
-  console.log(session?.user?.email);
-},[session])
+  useEffect(() => {
+    console.log(session?.user?.id);
+    console.log(session?.user?.name);
+    console.log(session?.user?.email);
+  },[session])
   
   useEffect(() => {
     if (toggle) {

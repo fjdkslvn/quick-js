@@ -1,16 +1,14 @@
 'use client'
 
-import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react"
 import { useRecoilState } from 'recoil';
-import { favoritesDocsData } from '@/recoil/favoritesAtom';
-import { SideMenu, sideMenuData } from '@/recoil/sideMenuAtom';
+import { sideMenuData } from '@/recoil/sideMenuAtom';
+import { SideMenu } from 'sideMenuType';
 import SidebarAccordion from "./sidebarAccordion";
 import FavoritesAccordion from "./favoritesAccordion";
 
 const Sidebar: React.FC = () => {
   const { data: session } = useSession();
-  const [favoritesDocsList, setFavoritesDocsList] = useRecoilState(favoritesDocsData);
   const [sideMenu, setSideMenu] = useRecoilState<SideMenu[]>(sideMenuData);
 
   return (

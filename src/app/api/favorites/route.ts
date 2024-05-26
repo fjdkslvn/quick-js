@@ -3,17 +3,30 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+const getFavoritesDocs = async (userID:string) => {
+  const favoriteDocs = await prisma.favorites.findMany({
+    where: {
+      user_id: userID ?? ''
+    },
+    include: {
+      docs: {
+        include: {
+          side_submenu: {
+            select: {
+              link: true
+            }
+          }
+        }
+      }
+    }
+  });
+  return favoriteDocs;
+}
+
 export async function GET(request: NextRequest) {
   try {
     const userID = request.nextUrl.searchParams.get("user_id");
-    const favoriteDocs = await prisma.favorites.findMany({
-      where: {
-        user_id: userID ?? ''
-      },
-      include: {
-        docs: true
-      }
-    });
+    const favoriteDocs = await getFavoritesDocs(userID ?? '');
     
     return NextResponse.json({ data:favoriteDocs, status: 200 });
   } catch (error) {
@@ -35,19 +48,12 @@ export async function POST(request: NextRequest) {
       }
     });
 
-    const favoriteDocs = await prisma.favorites.findMany({
-      where: {
-        user_id: body.user_id
-      },
-      include: {
-        docs: true
-      }
-    });
+    const favoriteDocs = await getFavoritesDocs(body.user_id);
     
-    return NextResponse.json({ data:favoriteDocs, status: 200 });
+    return NextResponse.json({ msg:'즐겨찾기에 추가되었습니다.', data:favoriteDocs, status: 200 });
   } catch (error) {
     console.error('Error adding favorite:', error);
-    return NextResponse.json({ msg:'즐겨찾기 등록에 실패하였습니다.', error: error, status: 500 });
+    return NextResponse.json({ msg:'즐겨찾기에 추가하지 못했습니다.', error: error, status: 500 });
   }
 }
 
@@ -64,18 +70,11 @@ export async function DELETE(request: NextRequest) {
       }
     });
 
-    const favoriteDocs = await prisma.favorites.findMany({
-      where: {
-        user_id: userID ?? ''
-      },
-      include: {
-        docs: true
-      }
-    });
+    const favoriteDocs = await getFavoritesDocs(userID ?? '');
     
-    return NextResponse.json({ data:favoriteDocs, status: 200 });
+    return NextResponse.json({ msg:'즐겨찾기에서 제외되었습니다.', data:favoriteDocs, status: 200 });
   } catch (error) {
     console.error('Error deleting favorite:', error);
-    return NextResponse.json({ msg:'즐겨찾기 삭제에 실패하였습니다.', error: error, status: 500 });
+    return NextResponse.json({ msg:'즐겨찾기에서 제외하지 못했습니다.', error: error, status: 500 });
   }
 }

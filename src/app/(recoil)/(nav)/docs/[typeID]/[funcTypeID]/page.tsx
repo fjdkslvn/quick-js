@@ -9,19 +9,20 @@ import PageNav from '@/components/pageNav';
 import { useRecoilState, RecoilState } from 'recoil';
 import { dataSelector } from '@/recoil/funcDataAtom';
 import { functionData } from '@/constants/fucntionData';
-import { SideMenu, sideMenuData } from '@/recoil/sideMenuAtom';
+import { sideMenuData } from '@/recoil/sideMenuAtom';
 import { PageNav as PageNavType, PageNavData } from '@/recoil/pageNavAtom';
 import { useEffect, useState } from 'react';
-import { docs } from '@prisma/client';
+import { SideMenu, Docs } from "sideMenuType";
+import { usePathname } from "next/navigation";
 
 export default function Page({ params }: { params: { typeID: string, funcTypeID: string } }) {
-  
   const [sideToDocs, setSideToDocs] = useRecoilState<SideMenu[]>(sideMenuData);
   const [pageNavData, setPageNavData] = useRecoilState<PageNavType>(PageNavData);
-  const [docs, setDocs] = useState<docs[] | null>(null);
+  const [docs, setDocs] = useState<Docs[] | null>(null);
   const [resultList, setResultList] = useState<string[]>([]);
   const selectedData = dataSelector[params.typeID as keyof typeof dataSelector] as RecoilState<string>; // 타입 명시
   const [data, setData] = useRecoilState<string>(selectedData); // 제네릭 타입 명시
+  const pathName = usePathname();
 
   useEffect(() => {
     if(sideToDocs){
@@ -48,13 +49,26 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
   },[sideToDocs]);
 
   useEffect(() => {
-    createResult(); // 기본 결과값 채우기
+    if(docs){
+      scrollToHash();
+      createResult(); // 기본 결과값 채우기
+    }
   }, [docs]);
+
+  const scrollToHash = () => {
+    if(window.location.hash){
+      const hash = window.location.hash.substring(1);
+      const element = document.getElementById(`${hash}`);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
 
   const createResult = () => {
     if(docs && data){
       let newResultList: string[] = [];
-      docs.map((docsInfo:docs) => {
+      docs.map((docsInfo:Docs) => {
         const useData = params.typeID === 'string' ? data : eval('(' + data + ')');
         const resultData = functionData[`func${docsInfo.id}`](useData);
         newResultList.push(JSON.stringify(resultData));

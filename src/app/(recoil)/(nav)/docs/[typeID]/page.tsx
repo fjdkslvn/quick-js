@@ -4,7 +4,8 @@ import PageNav from '@/components/pageNav';
 import ScrollNav from '@/components/scrollNav';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { SideMenu, sideMenuData } from '@/recoil/sideMenuAtom';
+import { sideMenuData } from '@/recoil/sideMenuAtom';
+import { SideMenu } from 'sideMenuType';
 import { PageNav as PageNavType, PageNavData } from '@/recoil/pageNavAtom';
 import { side_menu, side_submenu } from '@prisma/client';
 
