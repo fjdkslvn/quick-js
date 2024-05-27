@@ -60,7 +60,7 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
       const hash = window.location.hash.substring(1);
       const element = document.getElementById(`${hash}`);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: 'instant' });
       }
     }
   }

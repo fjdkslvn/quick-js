@@ -42,8 +42,8 @@ const Favorites: React.FC<{docsID:number}> = ({docsID}) => {
       setFaoritesIDList(docsIdList);
       setFavoritesDocsList(docsList);
     }
-    setToastMessage(msg);
-    setShowToast(true);
+    // setToastMessage(msg);
+    // setShowToast(true);
   }
   const handleDeldData = async () => {
     const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/favorites?user_id=${session?.user?.id}&docs_id=${docsID}`, {
@@ -59,16 +59,16 @@ const Favorites: React.FC<{docsID:number}> = ({docsID}) => {
       setFaoritesIDList(docsIdList);
       setFavoritesDocsList(docsList);
     }
-    setToastMessage(msg);
-    setShowToast(true);
+    // setToastMessage(msg);
+    // setShowToast(true);
   }
 
   return (
     session
     ? <>
         {favoritesActive
-          ? <StarRateIcon className="cursor-pointer mt-px ml-2 hover:text-yellow-400 dark:hover:text-yellow-400" onClick={handleDeldData}/>
-          : <StarBorderIcon className="cursor-pointer mt-px ml-2 hover:text-yellow-400 dark:hover:text-yellow-400" onClick={handleAddData}/>}
+          ? <StarRateIcon className="cursor-pointer mt-px ml-2 text-yellow-400 transition-transform duration-300 hover:rotate-45 hover:text-yellow-300" onClick={handleDeldData}/>
+          : <StarBorderIcon className="cursor-pointer mt-px ml-2 text-yellow-400 transition-transform duration-300 hover:rotate-45 hover:text-yellow-300" onClick={handleAddData}/>}
         {showToast && <Toast message={toastMessage} onClose={() => setShowToast(false)} />}
       </>
     :<></>

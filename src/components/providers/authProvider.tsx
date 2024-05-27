@@ -9,6 +9,6 @@ type Props = {
   children: ReactNode;
 };
  
-export default function AuthSession({ session, children }: Props) {
+export default function AuthProvider({ session, children }: Props) {
   return <SessionProvider session={session}>{children}</SessionProvider>;
 }
