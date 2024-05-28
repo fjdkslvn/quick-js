@@ -12,16 +12,14 @@ import Image from "next/image";
 
 const FavoritesAccordion: React.FC = () => {
   const { data: session } = useSession();
-  const [firstStart, setFirstStart] = useState(true);
   const [loadState, setLoadState] = useState(false);
   const [faoritesIDList, setFaoritesIDList] = useRecoilState(favoritesIDData);
   const [favoritesDocsList, setFavoritesDocsList] = useRecoilState(favoritesDocsData);
   const pathName = usePathname();
 
   useEffect(() => {
-    if(session && firstStart){
+    if(session){
       setLoadState(true);
-      setFirstStart(false);
       getFavoritesList();
     }
   },[session]);
