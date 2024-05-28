@@ -41,7 +41,7 @@ const Sidebar: React.FC = () => {
             href={menu.link}
             className={pathName === menu.link
                         ? "flex justify-between text-blue-500 font-bold px-2 h-9 my-1 flex items-center rounded hover:bg-gray-100 dark:hover:bg-neutral-800"
-                        : "flex justify-between text-gray-500 px-2 h-9 my-1 flex items-center rounded hover:bg-gray-100 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-neutral-800"}
+                        : "flex justify-between text-gray-600 px-2 h-9 my-1 flex items-center rounded hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-neutral-800"}
           >
             {menu.name}
             {/* {toggle
@@ -57,7 +57,7 @@ const Sidebar: React.FC = () => {
                     href={sub_menu.link}
                     className={pathName === sub_menu.link
                                 ? "w-full text-blue-500 font-bold px-2 h-9 flex items-center rounded my-0.5"
-                                : "w-full text-gray-500 px-2 h-9 flex items-center rounded my-0.5 hover:bg-gray-100 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-neutral-800"}
+                                : "w-full text-gray-600 px-2 h-9 flex items-center rounded my-0.5 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-neutral-800"}
                   >
                     {sub_menu.name}
                   </Link>

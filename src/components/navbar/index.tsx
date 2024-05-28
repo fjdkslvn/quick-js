@@ -18,12 +18,6 @@ const Navbar: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
   useEffect(() => {
     setSideMenu(sideMenuList);
   },[]);
-
-  useEffect(() => {
-    console.log(session?.user?.id);
-    console.log(session?.user?.name);
-    console.log(session?.user?.email);
-  },[session])
   
   useEffect(() => {
     if (toggle) {
