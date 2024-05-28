@@ -1,3 +1,4 @@
+import ScrollNav from "@/components/scrollNav";
 import Sidebar from "@/components/sidebar";
 
 export default function Layout({
@@ -10,7 +11,10 @@ export default function Layout({
     <div className="grid place-items-center">
       <div className="max-w-screen-xl flex flex-row w-full">
         <Sidebar />
-        {children}
+        <div className="flex flex-row w-full">
+          {children}
+          <ScrollNav/>
+        </div>
       </div>
     </div>
   )

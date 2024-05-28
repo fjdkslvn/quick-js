@@ -1,6 +1,6 @@
 import { Favorites, DocsWithLink } from "@/recoil/favoritesAtom";
 
-const setFavoritesData = (data: Favorites[]): [number[], DocsWithLink[]] => {
+export function setFavoritesData (data: Favorites[]): [number[], DocsWithLink[]] {
   const docsIdList: number[] = [];
   const docsList: DocsWithLink[] = [];
 
@@ -16,5 +16,3 @@ const setFavoritesData = (data: Favorites[]): [number[], DocsWithLink[]] => {
 
   return [docsIdList, docsList];
 };
-
-export default setFavoritesData;

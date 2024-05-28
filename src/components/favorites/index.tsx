@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react"
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import { useEffect, useState } from 'react';
-import setFavoritesData from '@/utils/setFavoritesData';
+import { setFavoritesData } from '@/utils/favoritesData';
 import Toast from '@/components/functionBlock/toast';
 
 const Favorites: React.FC<{docsID:number}> = ({docsID}) => {

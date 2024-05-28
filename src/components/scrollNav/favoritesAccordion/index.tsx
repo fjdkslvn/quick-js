@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react"
 import { useRecoilState } from "recoil";
 import { favoritesIDData, favoritesDocsData, DocsWithLink } from '@/recoil/favoritesAtom';
-import setFavoritesData from "@/utils/setFavoritesData";
+import { setFavoritesData } from "@/utils/favoritesData";
 import { usePathname } from "next/navigation";
 import StarRateIcon from '@mui/icons-material/StarRate';
 import Image from "next/image";
