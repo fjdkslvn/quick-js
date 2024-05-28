@@ -27,12 +27,8 @@ const ScrollNav: React.FC = () => {
 
   return (
       <div className="min-w-56 px-4 py-6 h-max sticky top-16 hidden xl:block">
-        {session && 
-          <>
-            <FavoritesAccordion/>
-            <div className="w-full h-px bg-zinc-200 my-4 dark:bg-zinc-700"></div>
-          </>
-        }
+        <FavoritesAccordion/>
+        <div className="w-full h-px bg-zinc-200 my-4 dark:bg-zinc-700"></div>
         {scrollList.length > 0 &&
           <>
             <div className="text-sm font-semibold mb-4">현재 페이지</div>
