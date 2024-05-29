@@ -10,7 +10,7 @@ const Notice: React.FC<{ notice: notice }> = ({ notice }) => {
         <div className="text-gray-600 mr-16 dark:text-gray-300">{formattedDate}</div>
         <div>
           <div className="mb-6 text-2xl font-bold">{notice.title}</div>
-          <div className="text-gray-600 leading-7 dark:text-gray-300">{notice.content}</div>
+          <div className="text-gray-600 leading-7 dark:text-gray-300" dangerouslySetInnerHTML={{ __html: notice.content }}></div>
         </div>
       </div>
     </div>
