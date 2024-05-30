@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 
-const Toast: React.FC<{message:string; onClose: ()=> void}> = ({ message, onClose }) => {
+const Toast: React.FC<{message:string, error?:boolean, onClose: ()=> void}> = ({ message, error=false, onClose }) => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -14,7 +14,8 @@ const Toast: React.FC<{message:string; onClose: ()=> void}> = ({ message, onClos
   }, [onClose]);
 
   return (
-    <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-sky-300 text-white px-4 py-2 rounded-md shadow-md text-xs">
+    <div className={["fixed bottom-10 left-1/2 transform -translate-x-1/2 text-gray-900 px-4 py-2 rounded-md shadow-md text-xs"
+                    ,error ? "bg-red-200" : "bg-amber-200"].join(' ')}>
       {message}
     </div>
   );
