@@ -74,7 +74,7 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
   }
 
   return (
-    <div className="w-full px-8 py-6 md:px-12">
+    <>
       <div className="text-sm mb-8 flex flex-row w-full items-end text-gray-600 dark:text-gray-300">
         <Link
           href={`/docs/${params.typeID}`}
@@ -93,7 +93,7 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
         ))}
       </div>
       <PageNav/>
-    </div>
+    </>
   );
 }
   

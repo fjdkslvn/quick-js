@@ -38,7 +38,7 @@ export default function Page({ params }: { params: { typeID: string } }) {
   },[sideToDocs]);
 
   return (
-    <div className="w-full px-8 py-6 md:px-12">
+    <>
       <div className="text-sm mb-6 text-gray-600 dark:text-gray-300">{menu?.name}</div>
       <h1 className="text-3xl font-bold mb-3">{menu?.name}</h1>
       <h2 className="mb-10">{menu?.description}</h2>
@@ -48,6 +48,6 @@ export default function Page({ params }: { params: { typeID: string } }) {
         ))}
       </div>
       <PageNav/>
-    </div>
+    </>
   );
 }

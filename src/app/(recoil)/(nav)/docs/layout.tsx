@@ -12,7 +12,9 @@ export default function Layout({
       <div className="max-w-screen-xl flex flex-row w-full">
         <Sidebar />
         <div className="flex flex-row w-full">
-          {children}
+          <div className="w-full px-8 py-6 lg:px-12">
+            {children}
+          </div>
           <ScrollNav/>
         </div>
       </div>

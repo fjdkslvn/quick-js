@@ -26,7 +26,7 @@ const ScrollNav: React.FC = () => {
   },[sideToDocs, pathName]);
 
   return (
-      <div className="min-w-56 px-4 py-6 h-max sticky top-16 hidden xl:block">
+      <div className="min-w-56 px-4 py-6 h-max sticky top-16 hidden md:block">
         <FavoritesAccordion/>
         <div className="w-full h-px bg-zinc-200 my-4 dark:bg-zinc-700"></div>
         {scrollList.length > 0 &&
