@@ -37,6 +37,15 @@ textarea{
         display: block;
     }
 }
+.invisible-mobile{
+    display: block;
+}
+@media (max-width: 767px) {
+	.invisible-mobile{
+        display: none;
+    }
+}
+
 
 .backdrop-filter-blur-8 {
     backdrop-filter: blur(8px);
