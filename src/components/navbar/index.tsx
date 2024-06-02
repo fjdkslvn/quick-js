@@ -58,10 +58,8 @@ const Navbar: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
       {toggle &&
         <div className="block fixed top-16 px-4 py-4 pb-24 bg-backColor border-t border-zinc-200 w-full h-screen md:hidden dark:bg-backDarkColor dark:border-zinc-700">
           <div>
-            <Link className="text-sm pl-2 h-9 my-1 flex items-center rounded text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-neutral-800" href="/docs/string" onClick={handleToggle}>문서</Link>
-          </div>
-          <div>
-            <Link className="text-sm pl-2 h-9 my-1 flex items-center rounded text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-neutral-800" href="/notice" onClick={handleToggle}>공지사항</Link>
+            <Link className="text-sm pl-2 h-9 my-1 flex items-center rounded text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-neutral-800" href="/docs/string" onClick={handleToggle}>문서</Link>
+            <Link className="text-sm pl-2 h-9 my-1 flex items-center rounded text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-neutral-800" href="/notice" onClick={handleToggle}>공지사항</Link>
           </div>
           <ThemeSeletor/>
         </div>}
