@@ -8,7 +8,8 @@ const ThemeSelector: React.FC = () => {
   const { theme, setTheme } = useTheme();
   const [themeState, setThemeState] = useState<string>();
   const [themeToggle, setThemeToggle] = useState(false);
-  const themeSelectorRef = useRef<HTMLDivElement>(null);
+  const themeSelectorPCRef = useRef<HTMLDivElement>(null);
+  const themeSelectorMobileRef = useRef<HTMLDivElement>(null);
 
   const themeShowToggle = () => {
     setThemeToggle(!themeToggle);
@@ -20,7 +21,7 @@ const ThemeSelector: React.FC = () => {
   };
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (themeSelectorRef.current && !themeSelectorRef.current.contains(event.target as Node)) {
+    if (themeSelectorPCRef.current && !themeSelectorPCRef.current.contains(event.target as Node) && themeSelectorMobileRef.current && !themeSelectorMobileRef.current.contains(event.target as Node)) {
       setThemeToggle(false);
       event.stopPropagation(); // 이벤트 버블링 중지
     }
@@ -53,7 +54,7 @@ const ThemeSelector: React.FC = () => {
             : <MonitorIcon id="theme_system"/>}
         </div>
         {themeToggle &&
-          <div ref={themeSelectorRef} className="absolute top-16 right-2 w-28 bg-white shadow-lg py-1 rounded-md border-solid border border-gray-300 text-gray-900 font-medium text-sm dark:text-gray-100 dark:bg-backDarkColor">
+          <div ref={themeSelectorPCRef} className="absolute top-16 right-2 w-28 bg-white shadow-lg py-1 rounded-md border-solid border border-gray-300 text-gray-900 font-medium text-sm dark:text-gray-100 dark:bg-backDarkColor">
             <div className={["flex flex-row cursor-pointer px-3 py-1 hover:bg-gray-100 dark:hover:bg-zinc-800", theme === 'light' && "text-blue-500"].join(' ')} onClick={() => handleChange('light')}>
               <LightModeOutlinedIcon className={[theme === 'light'?"text-blue-500":"text-gray-400", "w-5 mr-2"].join(' ')}/>
               Light
@@ -79,7 +80,7 @@ const ThemeSelector: React.FC = () => {
         </div>
 
         {themeToggle &&
-          <div ref={themeSelectorRef} className="w-full absolute bottom-14 w-28 bg-white shadow-lg py-1 rounded-md border-solid border border-gray-300 text-gray-900 font-medium text-sm dark:text-gray-100 dark:bg-backDarkColor">
+          <div ref={themeSelectorMobileRef} className="w-full absolute bottom-14 w-28 bg-white shadow-lg py-1 rounded-md border-solid border border-gray-300 text-gray-900 font-medium text-sm dark:text-gray-100 dark:bg-backDarkColor">
             <div className={["flex flex-row cursor-pointer px-3 py-1 hover:bg-gray-100 dark:hover:bg-zinc-800", theme === 'light' && "text-blue-500"].join(' ')} onClick={() => handleChange('light')}>
               <LightModeOutlinedIcon className={[theme === 'light'?"text-blue-500":"text-gray-400", "w-5 mr-2"].join(' ')}/>
               Light
