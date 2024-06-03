@@ -1,4 +1,5 @@
-import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 import { SideMenu } from 'sideMenuType';
 
 export default async function Layout({
@@ -11,9 +12,12 @@ export default async function Layout({
   const sideMenuList:SideMenu[] = await resp.json();
   
   return (
-    <>
-      <Navbar sideMenuList={sideMenuList}/>
-      {children}
-    </>
+    <div className="flex flex-col justify-between h-screen">
+      <div>
+        <Header sideMenuList={sideMenuList}/>
+        {children}
+      </div>
+      <Footer/>
+    </div>
   )
 }

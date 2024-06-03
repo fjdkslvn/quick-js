@@ -3,14 +3,13 @@ import Link from "next/link";
 import { useEffect, useState } from 'react';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import GitHubIcon from '@mui/icons-material/GitHub';
 import ThemeSeletor from "../themeSeletor";
 import { useRecoilState } from 'recoil';
 import { sideMenuData } from '@/recoil/sideMenuAtom';
 import { SideMenu } from 'sideMenuType';
 import { useSession, signIn, signOut } from "next-auth/react"
 
-const Navbar: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
+const Header: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
   const { data: session } = useSession();
   const [sideMenu, setSideMenu] = useRecoilState<SideMenu[]>(sideMenuData);
   const [toggle, setToggle] = useState(false);
@@ -48,7 +47,6 @@ const Navbar: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
         <div className="invisible-mobile">
           <ThemeSeletor/>
         </div>
-        {/* <Link className="invisible-mobile mr-6" href="https://github.com/fjdkslvn/quick-js" target="_blank"><GitHubIcon/></Link> */}
         <div className="visible-mobile">
           {toggle
           ? <CloseRoundedIcon className="mr-6 cursor-pointer" onClick={handleToggle}/>
@@ -67,4 +65,4 @@ const Navbar: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
   );
 };
 
-export default Navbar;
+export default Header;
