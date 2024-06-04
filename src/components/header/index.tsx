@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 import { sideMenuData } from '@/recoil/sideMenuAtom';
 import { SideMenu } from 'sideMenuType';
 import { useSession, signIn, signOut } from "next-auth/react"
+import Image from "next/image";
 
 const Header: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
   const { data: session } = useSession();
@@ -33,7 +34,10 @@ const Header: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
   return (
     <div className="border-b border-zinc-200 grid place-items-center sticky top-0 z-10 backdrop-filter-blur-8 bg-white bg-opacity-85 dark:bg-opacity-85 dark:bg-backDarkColor dark:border-zinc-700">
       <nav className="flex flex-row items-center max-w-screen-xl w-full h-16">
-        <Link className="ml-6 mr-10 text-lg font-medium" href="/">QuickJS</Link>
+        <Link className="ml-6 mr-10 text-lg font-medium" href="/">
+          <Image className="block dark:hidden" src="/images/logo.png" alt="로고" width="120" height="45"/>
+          <Image className="hidden dark:block" src="/images/white_logo.png" alt="다크모드 로고" width="120" height="45"/>
+        </Link>
         <div className="hidden mr-auto md:block">
           <Link className="mr-6 text-sm font-medium text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-500" href="/docs/string">문서</Link>
           <Link className="mr-6 text-sm font-medium text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-500" href="/notice">공지사항</Link>
