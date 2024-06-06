@@ -32,40 +32,42 @@ const Header: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
   }
 
   return (
-    <div className="border-b border-zinc-200 grid place-items-center sticky top-0 z-10 backdrop-filter-blur-8 bg-white bg-opacity-85 dark:bg-opacity-85 dark:bg-backDarkColor dark:border-zinc-700">
-      <nav className="flex flex-row items-center max-w-screen-xl w-full h-16">
-        <Link className="ml-6 mr-10 text-lg font-medium" href="/">
-          <Image className="block dark:hidden" src="/images/logo.png" alt="로고" width="120" height="45"/>
-          <Image className="hidden dark:block" src="/images/white_logo.png" alt="다크모드 로고" width="120" height="45"/>
-        </Link>
-        <div className="hidden mr-auto md:block">
-          <Link className="mr-6 text-sm font-medium text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-500" href="/docs/string">문서</Link>
-          <Link className="mr-6 text-sm font-medium text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-500" href="/notice">공지사항</Link>
-        </div>
-        {session
-        ?<>
-          <div className="ml-auto mr-2 text-xs">{`${session.user?.name}님`}</div>
-          <div className="cursor-pointer mr-6 text-sm font-medium text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-500" onClick={() => signOut()}>로그아웃</div>
-        </>
-        :<div className="ml-auto cursor-pointer mr-6 text-sm font-medium text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-500" onClick={() => signIn()}>로그인</div>}
-        <div className="invisible-mobile">
-          <ThemeSeletor/>
-        </div>
-        <div className="visible-mobile">
-          {toggle
-          ? <CloseRoundedIcon className="mr-6 cursor-pointer" onClick={handleToggle}/>
-          : <MenuRoundedIcon className="mr-6 cursor-pointer" onClick={handleToggle}/>}
-        </div>
-      </nav>
+    <>
+      <div className="border-b border-zinc-200 grid place-items-center sticky top-0 z-10 backdrop-filter-blur-8 bg-white bg-opacity-85 dark:bg-opacity-85 dark:bg-backDarkColor dark:border-zinc-700">
+        <nav className="flex flex-row items-center max-w-screen-xl w-full h-16">
+          <Link className="ml-6 mr-10 text-lg font-medium" href="/">
+            <Image className="block dark:hidden" src="/images/logo.png" alt="로고" width="120" height="45"/>
+            <Image className="hidden dark:block" src="/images/white_logo.png" alt="다크모드 로고" width="120" height="45"/>
+          </Link>
+          <div className="hidden mr-auto md:block">
+            <Link className="mr-6 text-sm font-medium text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-500" href="/docs/string">문서</Link>
+            <Link className="mr-6 text-sm font-medium text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-500" href="/notice">공지사항</Link>
+          </div>
+          {session
+          ?<>
+            <div className="ml-auto mr-2 text-xs">{`${session.user?.name}님`}</div>
+            <div className="cursor-pointer mr-6 text-sm font-medium text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-500" onClick={() => signOut()}>로그아웃</div>
+          </>
+          :<div className="ml-auto cursor-pointer mr-6 text-sm font-medium text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-500" onClick={() => signIn()}>로그인</div>}
+          <div className="invisible-mobile">
+            <ThemeSeletor/>
+          </div>
+          <div className="visible-mobile">
+            {toggle
+            ? <CloseRoundedIcon className="mr-6 cursor-pointer" onClick={handleToggle}/>
+            : <MenuRoundedIcon className="mr-6 cursor-pointer" onClick={handleToggle}/>}
+          </div>
+        </nav>
+      </div>
       {toggle &&
-        <div className="flex flex-col justify-between fixed top-16 px-4 pt-4 pb-20 bg-backColor border-t border-zinc-200 w-full h-screen md:hidden dark:bg-backDarkColor dark:border-zinc-700">
+        <div className="flex flex-col justify-between fixed top-16 px-4 pt-4 pb-20 bg-backColor border-t border-zinc-200 w-full h-full md:hidden dark:bg-backDarkColor dark:border-zinc-700">
           <div>
             <Link className="text-sm pl-2 h-9 my-1 flex items-center rounded text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-neutral-800" href="/docs/string" onClick={handleToggle}>문서</Link>
             <Link className="text-sm pl-2 h-9 my-1 flex items-center rounded text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-neutral-800" href="/notice" onClick={handleToggle}>공지사항</Link>
           </div>
           <ThemeSeletor/>
         </div>}
-    </div>
+    </>
   );
 };
 
