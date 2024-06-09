@@ -5,68 +5,71 @@ import { useRecoilState } from 'recoil';
 import { sideMenuData } from '@/recoil/sideMenuAtom';
 import { SideMenu } from 'sideMenuType';
 import { usePathname } from "next/navigation";
-// import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-// import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { useEffect, useState } from "react";
+import { RightArrow } from "@public/svgs";
 
 const Sidebar: React.FC = () => {
   const [sideMenu, setSideMenu] = useRecoilState<SideMenu[]>(sideMenuData);
-  // const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const [pathNameList, setPathNameList] = useState<string[]>([]);
   const pathName = usePathname();
 
-  // 대메뉴를 토글하는 함수
-  // const toggleMenu = () => {
-  //   if(pathName.includes('/docs/')){
-  //     const target = pathName.split('/')[2];
-  //     if(menu.link === pathName && menu.name === target){
-  //       setToggle(!toggle);
-  //     }
-  //   }
-  // };
-  
-  // useEffect(() => {
-  //   if(pathName.includes('/docs/')){
-  //     const target = pathName.split('/')[2];
-  //     if(menu.name === target){
-  //       setToggle(true);
-  //     }
-  //   }
-  // },[menu, pathName]);
+  useEffect(()=>{
+    setPathNameList(pathName.split('/'));
+  },[pathName])
+
+  const toggleMenu = () => {
+    setToggle(!toggle);
+  };
 
   return (
-    <nav className="min-w-56 px-6 py-4 h-max sticky top-16 hidden md:block">
-      {sideMenu?.map((menu) => (
-        <div className="text-sm" key={`menu_${menu.id}`}>
-          <Link
-            // onClick={toggleMenu}
-            href={menu.link}
-            className={pathName === menu.link
-                        ? "flex justify-between text-blue-500 font-bold px-2 h-9 my-1 flex items-center rounded hover:bg-gray-100 dark:hover:bg-neutral-800"
-                        : "flex justify-between text-gray-600 px-2 h-9 my-1 flex items-center rounded hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-neutral-800"}
-          >
-            {menu.name}
-            {/* {toggle
-            ?<KeyboardArrowDownIcon/>
-            :<KeyboardArrowRightIcon/>} */}
-          </Link>
-          {/* <div className={`overflow-hidden transition-max-height transition-height duration-500 ${toggle ? 'max-h-96' : 'max-h-0'}`}> */}
-          <div className={'overflow-hidden transition-max-height transition-height duration-500 max-h-96'}>
-            {menu.side_submenu.map((sub_menu) => (
-                <div className="flex flex-row w-full items-center" key={`sub_menu_${sub_menu.id}`}>
-                  <div className="w-px h-10 mx-3 bg-gray-300 dark:bg-gray-600"></div>
-                  <Link
-                    href={sub_menu.link}
-                    className={pathName === sub_menu.link
-                                ? "w-full text-blue-500 font-bold px-2 h-9 flex items-center rounded my-0.5"
-                                : "w-full text-gray-600 px-2 h-9 flex items-center rounded my-0.5 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-neutral-800"}
-                  >
-                    {sub_menu.name}
-                  </Link>
-                </div>
-            ))}
+    <div>
+      <div className="border-solid border-b border-zinc-200 dark:border-zinc-700 cursor-pointer flex justify-between items-center px-4 py-3 md:hidden" onClick={toggleMenu}>
+        {pathNameList.length > 3
+        ? <div className="flex text-sm w-full items-end text-gray-600 dark:text-gray-300">
+            <p>{pathNameList[2]}</p>
+            <RightArrow/>
+            <p>{pathNameList[3]}</p>
           </div>
+        : <div className="text-sm w-full items-end text-gray-600 dark:text-gray-300">
+            <p>{pathNameList[2]}</p>
+          </div>}
+        {toggle ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+      </div>
+      <nav className={["overflow-hidden transition-max-height transition-height duration-500", toggle ? 'max-h-96' : 'max-h-0 md:max-h-96',"min-w-56 sticky top-16"].join(' ')}>
+        <div className="px-6 py-4">
+          {sideMenu?.map((menu) => (
+            <div className="text-sm" key={`menu_${menu.id}`}>
+              <Link
+                href={menu.link}
+                className={pathName === menu.link
+                            ? "text-blue-500 font-bold px-2 h-9 my-1 flex items-center rounded hover:bg-gray-100 dark:hover:bg-neutral-800"
+                            : "text-gray-600 px-2 h-9 my-1 flex items-center rounded hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-neutral-800"}
+              >
+                {menu.name}
+              </Link>
+              <div>
+                {menu.side_submenu.map((sub_menu) => (
+                    <div className="flex flex-row w-full items-center" key={`sub_menu_${sub_menu.id}`}>
+                      <div className="w-px h-10 mx-3 bg-gray-300 dark:bg-gray-600"></div>
+                      <Link
+                        href={sub_menu.link}
+                        className={pathName === sub_menu.link
+                                    ? "w-full text-blue-500 font-bold px-2 h-9 flex items-center rounded my-0.5"
+                                    : "w-full text-gray-600 px-2 h-9 flex items-center rounded my-0.5 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-neutral-800"}
+                      >
+                        {sub_menu.name}
+                      </Link>
+                    </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </nav>
+      </nav>
+    </div>
   );
 };
 

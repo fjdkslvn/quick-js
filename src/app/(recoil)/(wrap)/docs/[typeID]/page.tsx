@@ -39,7 +39,6 @@ export default function Page({ params }: { params: { typeID: string } }) {
 
   return (
     <>
-      <div className="text-sm mb-6 text-gray-600 dark:text-gray-300">{menu?.name}</div>
       <h1 className="text-3xl font-bold mb-3">{menu?.name}</h1>
       <h2 className="mb-10">{menu?.description}</h2>
       <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">

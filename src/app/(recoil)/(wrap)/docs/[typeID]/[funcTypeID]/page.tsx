@@ -75,16 +75,6 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
 
   return (
     <>
-      <div className="text-sm mb-8 flex flex-row w-full items-end text-gray-600 dark:text-gray-300">
-        <Link
-          href={`/docs/${params.typeID}`}
-          className={"text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"}
-        >
-          {params.typeID}
-        </Link>
-        <RightArrow/>
-        <p>{params.funcTypeID}</p>
-      </div>
       <DataInput dataType={params.typeID as any} />
       <button className="block text-base mx-auto my-1 bg-blue-200 px-10 w-full h-12 rounded-lg text-gray-700 hover:bg-blue-300" onClick={createResult}>실행</button>
       <div>
