@@ -19,7 +19,7 @@ const DataInput: React.FC<{ dataType: DataSelectorType }> = ({ dataType }) => {
     if (textareaRef.current) {
       textareaRef.current.blur();
     }
-  }, [pathName]);
+  }, [pathName,data]);
 
   return (
     <>
