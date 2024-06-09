@@ -14,6 +14,7 @@ const DataInput: React.FC<{ dataType: DataSelectorType }> = ({ dataType }) => {
   };
 
   useEffect(() => {
+    // 페이지 로드시 textarea의 focus를 뻇는 작업
     if (focusRef.current) {
       focusRef.current.focus();
     }

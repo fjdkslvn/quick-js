@@ -11,11 +11,16 @@ export default function Layout({
     <div className="grid place-items-center">
       <div className="max-w-screen-xl display flex-row w-full md:flex">
         <Sidebar />
+        <div className="block md:hidden">
+          <ScrollNav/>
+        </div>
         <div className="flex flex-row w-full">
           <div className="w-full px-8 py-10 lg:px-12">
             {children}
           </div>
-          <ScrollNav/>
+          <div className="hidden md:block">
+            <ScrollNav/>
+          </div>
         </div>
       </div>
     </div>

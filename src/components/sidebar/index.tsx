@@ -19,7 +19,7 @@ const Sidebar: React.FC = () => {
   useEffect(()=>{
     setToggle(false);
     setPathNameList(pathName.split('/'));
-  },[pathName])
+  },[pathName]);
 
   const toggleMenu = () => {
     setToggle(!toggle);
@@ -39,7 +39,7 @@ const Sidebar: React.FC = () => {
           </div>}
         {toggle ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
       </div>
-      <nav className={["overflow-hidden transition-max-height transition-height duration-500", toggle ? 'max-h-96' : 'max-h-0 md:max-h-96',"min-w-56 sticky top-16"].join(' ')}>
+      <nav className={["border-solid border-zinc-200 dark:border-zinc-700 overflow-hidden transition-max-height duration-500", toggle ? 'max-h-screen border-b md:border-hidden' : 'max-h-0 md:max-h-screen',"min-w-56 sticky top-16"].join(' ')}>
         <div className="px-6 py-4">
           {sideMenu?.map((menu) => (
             <div className="text-sm" key={`menu_${menu.id}`}>
