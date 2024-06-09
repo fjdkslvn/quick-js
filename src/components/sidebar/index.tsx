@@ -17,6 +17,7 @@ const Sidebar: React.FC = () => {
   const pathName = usePathname();
 
   useEffect(()=>{
+    setToggle(false);
     setPathNameList(pathName.split('/'));
   },[pathName])
 
