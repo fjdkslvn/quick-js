@@ -30,6 +30,7 @@ const DataInput: React.FC<{ dataType: DataSelectorType }> = ({ dataType }) => {
         maxLength={1000}
         placeholder={'데이터를 넣어주세요.'}
         onChange={handleChange}
+        autoFocus={false}
       />
     </>
   );
