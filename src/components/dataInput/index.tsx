@@ -1,7 +1,6 @@
 import { useRecoilState, RecoilState } from 'recoil';
 import { dataSelector } from '@/recoil/funcDataAtom';
 import { useEffect, useRef } from 'react';
-import { usePathname } from 'next/navigation';
 
 type DataSelectorType = keyof typeof dataSelector;
 
@@ -9,17 +8,39 @@ const DataInput: React.FC<{ dataType: DataSelectorType }> = ({ dataType }) => {
   const selectedData = dataSelector[dataType] as RecoilState<string>;
   const [data, setData] = useRecoilState<string>(selectedData);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const pathName = usePathname();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setData(e.target.value);
   };
 
+  const handleClick = () => {
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  };
+
   useEffect(() => {
+    // 페이지 로드 시 textarea에 포커스가 자동으로 설정되지 않도록 설정
     if (textareaRef.current) {
       textareaRef.current.blur();
     }
-  }, [pathName,data]);
+
+    const handleFocus = (event: FocusEvent) => {
+      if (
+        textareaRef.current &&
+        event.target instanceof Node &&
+        !textareaRef.current.contains(event.target)
+      ) {
+        textareaRef.current.blur();
+      }
+    };
+
+    window.addEventListener('focus', handleFocus, true);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus, true);
+    };
+  }, []);
 
   return (
     <>
@@ -30,7 +51,9 @@ const DataInput: React.FC<{ dataType: DataSelectorType }> = ({ dataType }) => {
         maxLength={1000}
         placeholder={'데이터를 넣어주세요.'}
         onChange={handleChange}
+        onClick={handleClick}
         autoFocus={false}
+        tabIndex={-1}
       />
     </>
   );
