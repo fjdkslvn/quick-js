@@ -31,7 +31,7 @@ const Sidebar: React.FC = () => {
         {pathNameList.length > 3
         ? <div className="flex text-sm w-full items-end text-gray-600 dark:text-gray-300">
             <p>{pathNameList[2]}</p>
-            <RightArrow/>
+            <RightArrow className="mx-1"/>
             <p>{pathNameList[3]}</p>
           </div>
         : <div className="text-sm w-full items-end text-gray-600 dark:text-gray-300">

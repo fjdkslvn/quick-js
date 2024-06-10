@@ -1,5 +1,6 @@
 'use client'
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from 'react';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
@@ -8,16 +9,21 @@ import { useRecoilState } from 'recoil';
 import { sideMenuData } from '@/recoil/sideMenuAtom';
 import { SideMenu } from 'sideMenuType';
 import { useSession, signIn, signOut } from "next-auth/react"
-import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const Header: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
   const { data: session } = useSession();
   const [sideMenu, setSideMenu] = useRecoilState<SideMenu[]>(sideMenuData);
   const [toggle, setToggle] = useState(false);
+  const pathName = usePathname();
   
   useEffect(() => {
     setSideMenu(sideMenuList);
   },[]);
+
+  useEffect(() => {
+    setToggle(false);
+  },[pathName]);
   
   useEffect(() => {
     if (toggle) {
@@ -29,6 +35,13 @@ const Header: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
 
   const handleToggle = () => {
     setToggle(!toggle);
+  }
+
+  const mobileMovePage = (link:string) => {
+    // pathName 변경시 헤더 닫아야하는데, 같은 링크일때 이동안하는 경우 처리
+    if(link === pathName){
+      setToggle(false);
+    }
   }
 
   return (
@@ -62,8 +75,8 @@ const Header: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
       {toggle &&
         <div className="flex flex-col justify-between fixed top-16 px-4 pt-4 pb-20 bg-backColor border-t border-zinc-200 w-full h-full md:hidden dark:bg-backDarkColor dark:border-zinc-700">
           <div>
-            <Link className="text-sm pl-2 h-9 my-1 flex items-center rounded text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-neutral-800" href="/docs/string" onClick={handleToggle}>문서</Link>
-            <Link className="text-sm pl-2 h-9 my-1 flex items-center rounded text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-neutral-800" href="/notice" onClick={handleToggle}>공지사항</Link>
+            <Link className="text-sm pl-2 h-9 my-1 flex items-center rounded text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-neutral-800" href="/docs/string" onClick={() => mobileMovePage("/docs/string")}>문서</Link>
+            <Link className="text-sm pl-2 h-9 my-1 flex items-center rounded text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-neutral-800" href="/notice" onClick={() => mobileMovePage("/notice")}>공지사항</Link>
           </div>
           <ThemeSeletor/>
         </div>}

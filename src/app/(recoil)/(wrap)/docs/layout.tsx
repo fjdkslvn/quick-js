@@ -10,8 +10,11 @@ export default function Layout({
   return (
     <div className="grid place-items-center">
       <div className="max-w-screen-xl display flex-row w-full md:flex">
-        <Sidebar />
+        <div className="hidden md:block">
+          <Sidebar />
+        </div>
         <div className="block md:hidden">
+          <Sidebar />
           <ScrollNav/>
         </div>
         <div className="flex flex-row w-full">

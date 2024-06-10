@@ -37,7 +37,7 @@ const ScrollNav: React.FC = () => {
   return (
     <div>
       <div className="text-sm border-solid border-b border-zinc-200 dark:border-zinc-700 cursor-pointer flex justify-between items-center px-4 py-3 md:hidden" onClick={toggleMenu}>
-        빠른 이동
+        <p className="text-gray-600 dark:text-gray-300">빠른 이동</p>
         {toggle ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
       </div>
       <div className={["border-solid border-zinc-200 dark:border-zinc-700 overflow-hidden transition-max-height duration-500", toggle ? 'max-h-screen border-b md:border-hidden' : 'max-h-0 md:max-h-screen',"min-w-56 sticky top-16"].join(' ')}>
