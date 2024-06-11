@@ -8,7 +8,7 @@
   <!-- <h3 align="center">QuickJS</h3> -->
 
   <p align="center">
-    <a href="https://quickjs.vercel.app"><strong>방문하기 »</strong></a>
+    <a href="https://quickjs.vercel.app" target='_blank'><strong>방문하기 »</strong></a>
   </p>
 </div>
 <br/><br/>
@@ -47,13 +47,4 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- LICENSE -->
 ## 라이센스
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
+MIT 라이센스에 따라 배포됩니다. 자세한 내용은 <a href="https://github.com/fjdkslvn/quick-js?tab=MIT-1-ov-file#readme">`MIT license`</a> 를 참조하세요.
