@@ -12,7 +12,6 @@ model docs {
   side_submenu_id Int
   title           String       @db.VarChar(255)
   description     String       @db.Text
-  display_code    String       @db.Text
   side_submenu    side_submenu @relation(fields: [side_submenu_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "docs_ibfk_1")
   favorites       favorites[]
 

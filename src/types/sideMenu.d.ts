@@ -21,6 +21,5 @@ declare module "sideMenuType" {
     side_submenu_id: number;
     title: string;
     description: string;
-    display_code: string;
   }
 }

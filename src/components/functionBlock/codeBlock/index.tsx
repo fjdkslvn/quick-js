@@ -25,6 +25,7 @@ const CodeBlock: React.FC<{displayCode: string;}> = ({ displayCode }) => {
   // 화면에 보여질 함수 텍스트를 만드는 함수
   const setDisplayCode = () => {
     let newDisplayCode = displayCode;
+    console.log(displayCode);
     newDisplayCode = newDisplayCode.replace('return result;',`\n  console.log(result);`);
     newDisplayCode = newDisplayCode.replace('(data)=>{','');
     newDisplayCode = newDisplayCode.slice(0, -1);

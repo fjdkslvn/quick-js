@@ -4,7 +4,6 @@ CREATE TABLE `docs` (
     `side_submenu_id` INTEGER NOT NULL,
     `title` VARCHAR(255) NOT NULL,
     `description` TEXT NOT NULL,
-    `display_code` TEXT NOT NULL,
 
     INDEX `side_submenu_id`(`side_submenu_id`),
     PRIMARY KEY (`id`)
