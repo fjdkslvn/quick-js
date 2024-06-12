@@ -28,9 +28,7 @@ const CodeBlock: React.FC<{id: number;}> = ({ id }) => {
     let newDisplayCode = functionString[`func${id}`];
     setCodeString(`const handle = (data) => {
   ${newDisplayCode}
-}
-
-handle();`);
+}`);
   }
 
   const codeCopy = () => {

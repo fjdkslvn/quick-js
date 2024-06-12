@@ -91,8 +91,10 @@ export const functionString: FuncString = {
   func18: `return Object.entries(data);`,
   func19: `// 공부 속성 추가
   data.study = 'javascript';
+  
   return data;`,
   func20: `// 나이 속성 제거
   delete data.age;
+
   return data;`,
 };
