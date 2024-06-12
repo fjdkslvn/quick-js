@@ -6,8 +6,8 @@ import { Copy } from '@public/svgs';
 import Toast from '@/components/functionBlock/toast';
 import { useTheme } from 'next-themes';
 
-const CodeBlock: React.FC<{ displayCode: string;}> = ({ displayCode }) => {
-
+const CodeBlock: React.FC<{displayCode: string;}> = ({ displayCode }) => {
+  const [codeString, setCodeString] = useState('');
   const [showToast, setShowToast] = useState(false);
   const { theme, setTheme } = useTheme();
   const [systemTheme, setSystemTheme] = useState('light');
@@ -17,14 +17,28 @@ const CodeBlock: React.FC<{ displayCode: string;}> = ({ displayCode }) => {
       setSystemTheme('dark');
     } else {
       setSystemTheme('light')
-    }    
-  },[])
+    }
+
+    setDisplayCode();
+  },[]);
+
+  // 화면에 보여질 함수 텍스트를 만드는 함수
+  const setDisplayCode = () => {
+    let newDisplayCode = displayCode;
+    newDisplayCode = newDisplayCode.replace('return result;',`\n  console.log(result);`);
+    newDisplayCode = newDisplayCode.replace('(data)=>{','');
+    newDisplayCode = newDisplayCode.slice(0, -1);
+    newDisplayCode = newDisplayCode.trim();
+    newDisplayCode = newDisplayCode.replaceAll('        ','  ');
+    setCodeString(`function handle() {
+  ${newDisplayCode}
+}
+
+handle();`);
+  }
 
   const codeCopy = () => {
-    const code = `const result = ${displayCode};
-    console.log(result);`;
-
-    navigator.clipboard.writeText(code)
+    navigator.clipboard.writeText(codeString)
       .then(() => {
         setShowToast(true);
       })
@@ -43,10 +57,10 @@ const CodeBlock: React.FC<{ displayCode: string;}> = ({ displayCode }) => {
         <div className={["bg-blue-50 w-full min-h-24 rounded-b-lg px-4 py-2 text-sm text-gray-800 font-medium dark:bg-zinc-800", styles.codeHighlight].join(' ')}>
           {(theme ==='system' && systemTheme =='dark') || theme === 'dark'
             ?<SyntaxHighlighter language={"javascript"} style={a11yDark}>
-              {`const result = ${displayCode};\nconsole.log(result);`}
+              {codeString}
             </SyntaxHighlighter>
             :<SyntaxHighlighter language={"javascript"}>
-              {`const result = ${displayCode};\nconsole.log(result);`}
+              {codeString}
             </SyntaxHighlighter>}
         </div>
         {showToast && <Toast message={'복사되었습니다.'} onClose={() => setShowToast(false)} />}
