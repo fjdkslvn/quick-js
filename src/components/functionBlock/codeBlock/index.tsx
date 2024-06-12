@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 import { Copy } from '@public/svgs';
 import Toast from '@/components/functionBlock/toast';
 import { useTheme } from 'next-themes';
+import { functionData } from '@/constants/fucntionData';
 
 const CodeBlock: React.FC<{displayCode: string;}> = ({ displayCode }) => {
   const [codeString, setCodeString] = useState('');
@@ -20,6 +21,7 @@ const CodeBlock: React.FC<{displayCode: string;}> = ({ displayCode }) => {
     }
 
     setDisplayCode();
+    console.log(functionData['func1'].toString());
   },[]);
 
   // 화면에 보여질 함수 텍스트를 만드는 함수
