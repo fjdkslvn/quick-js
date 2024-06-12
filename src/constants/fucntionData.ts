@@ -1,78 +1,100 @@
 export interface FuncData {
   [key: string] : (data: any) => void;
 }
+export interface FuncString {
+  [key: string] : string;
+}
 
 export const functionData: FuncData = {
   func1: (data: any) => {
-    const result = data.includes('Hello');
-    return result;
+    return data.includes('Hello');
   },
   func2: (data: any) => {
-    const result = data.includes('Hello', 5);
-    return result;
+    return data.includes('Hello', 5);
   },
   func3: (data: any) => {
-    const result = data.indexOf('world');
-    return result;
+    return data.indexOf('world');
   },
   func4: (data: any) => {
-    const result = data.indexOf('Hello', 5);
-    return result;
+    return data.indexOf('Hello', 5);
   },
   func5: (data: any) => {
-    const result = data.split(' ');
-    return result;
+    return data.split(' ');
   },
   func6: (data: any) => {
-    const result = data.split(/[,!?]/);
-    return result;
+    return data.split(/[,!?]/);
   },
   func7: (data: any) => {
-    const result = data.split('',4);
-    return result;
+    return data.split('',4);
   },
   func8: (data: any) => {
-    const result = data.slice(7);
-    return result;
+    return data.slice(7);
   },
   func9: (data: any) => {
-    const result = data.slice(7, 12);
-    return result;
+    return data.slice(7, 12);
   },
   func10: (data: any) => {
-    const result = data.slice(-6);
-    return result;
+    return data.slice(-6);
   },
   func11: (data: any) => {
-    const result = data.toUpperCase();
-    return result;
+    return data.toUpperCase();
   },
   func12: (data: any) => {
-    const result = data.toLowerCase();
-    return result;
+    return data.toLowerCase();
   },
   func13: (data: any) => {
-    const result = data.trim();
-    return result;
+    return data.trim();
   },
   func14: (data: any) => {
-    const result = data.trimLeft();
-    return result;
+    return data.trimLeft();
   },
   func15: (data: any) => {
-    const result = data.trimRight()
-    return result;
+    return data.trimRight();
   },
   func16: (data: any) => {
-    const result = Object.keys(data);
-    return result;
+    return Object.keys(data);
   },
   func17: (data: any) => {
-    const result = Object.values(data);
-    return result;
+    return Object.values(data);
   },
   func18: (data: any) => {
-    const result = Object.entries(data);
-    return result;
+    return Object.entries(data);
   },
+  func19: (data: any) => {
+    data.study = 'javascript';
+    return data;
+  },
+  func20: (data: any) => {
+    delete data.age;
+    return data;
+  },
+};
+
+export const functionString: FuncString = {
+  func1: `return data.includes('Hello?');`,
+  func2: `return data.includes('Hello', 5);`,
+  func3: `return data.indexOf('world');`,
+  func4: `return data.indexOf('Hello', 5);`,
+  func5: `return data.split(' ');`,
+  func6: `return data.split(/[,!?]/);`,
+  func7: `return data.split('',4);`,
+  func8: `return data.slice(7);`,
+  func9: `return data.slice(7, 12);`,
+  func10: `return data.slice(-6);`,
+  func11: `return data.toUpperCase();`,
+  func12: `return data.toLowerCase();`,
+  func13: `return data.trim();`,
+  func14: `return data.trimLeft();`,
+  func15: `return data.trimRight();`,
+  func16: `return Object.keys(data);`,
+  func17: `return Object.values(data);`,
+  func18: `return Object.entries(data);`,
+  func19: `// 공부 속성 추가
+  data.study = 'javascript';
+  
+  return data;`,
+  func20: `// 나이 속성 제거
+  delete data.age;
+
+  return data;`,
 };
