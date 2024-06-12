@@ -5,9 +5,9 @@ import styles from './styles.module.css';
 import { Copy } from '@public/svgs';
 import Toast from '@/components/functionBlock/toast';
 import { useTheme } from 'next-themes';
-import { functionData } from '@/constants/fucntionData';
+import { functionString } from '@/constants/fucntionData';
 
-const CodeBlock: React.FC<{displayCode: string;}> = ({ displayCode }) => {
+const CodeBlock: React.FC<{id: number;}> = ({ id }) => {
   const [codeString, setCodeString] = useState('');
   const [showToast, setShowToast] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -21,19 +21,12 @@ const CodeBlock: React.FC<{displayCode: string;}> = ({ displayCode }) => {
     }
 
     setDisplayCode();
-    console.log(functionData['func1'].toString());
   },[]);
 
   // 화면에 보여질 함수 텍스트를 만드는 함수
   const setDisplayCode = () => {
-    let newDisplayCode = displayCode;
-    console.log(displayCode);
-    newDisplayCode = newDisplayCode.replace('return result;',`\n  console.log(result);`);
-    newDisplayCode = newDisplayCode.replace('(data)=>{','');
-    newDisplayCode = newDisplayCode.slice(0, -1);
-    newDisplayCode = newDisplayCode.trim();
-    newDisplayCode = newDisplayCode.replaceAll('        ','  ');
-    setCodeString(`function handle() {
+    let newDisplayCode = functionString[`func${id}`];
+    setCodeString(`const handle = (data) => {
   ${newDisplayCode}
 }
 

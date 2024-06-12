@@ -13,7 +13,7 @@ const FunctionBlock: React.FC<{ id:number, title: string, description: string, d
         <Favorites docsID={id}/>
       </h1>
       <h2 className="mb-3">{description}</h2>
-      <CodeBlock displayCode={displayCode}/>
+      <CodeBlock id={id}/>
       <ResultBlock resultData={result}/>
     </div>
   );
