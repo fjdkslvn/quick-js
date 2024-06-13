@@ -12,6 +12,7 @@ model docs {
   side_submenu_id Int
   title           String       @db.VarChar(255)
   description     String       @db.Text
+  sort_order      Int?
   side_submenu    side_submenu @relation(fields: [side_submenu_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "docs_ibfk_1")
   favorites       favorites[]
 
@@ -30,6 +31,7 @@ model side_menu {
   name         String         @db.VarChar(255)
   description  String         @db.Text
   link         String         @db.VarChar(255)
+  sort_order   Int?
   side_submenu side_submenu[]
 }
 
@@ -39,6 +41,7 @@ model side_submenu {
   name         String    @db.VarChar(255)
   description  String    @db.Text
   link         String    @db.VarChar(255)
+  sort_order   Int?
   docs         docs[]
   side_menu    side_menu @relation(fields: [side_menu_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "side_submenu_ibfk_1")
 

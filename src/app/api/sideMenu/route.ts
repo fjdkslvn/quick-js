@@ -9,14 +9,24 @@ export async function GET(request: NextRequest) {
       include: {
         side_submenu: {
           include: {
-            docs: true
+            docs: {
+              orderBy: {
+                sort_order: 'asc'
+              }
+            }
+          },
+          orderBy: {
+            sort_order: 'asc'
           }
         }
+      },
+      orderBy: {
+        sort_order: 'asc'
       }
     });
+
     return NextResponse.json(data);
   } catch (error) {
     console.error('Error getting side menus:', error);
   }
-
 }

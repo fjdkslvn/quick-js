@@ -4,6 +4,7 @@ CREATE TABLE `docs` (
     `side_submenu_id` INTEGER NOT NULL,
     `title` VARCHAR(255) NOT NULL,
     `description` TEXT NOT NULL,
+    `sort_order` INTEGER NULL,
 
     INDEX `side_submenu_id`(`side_submenu_id`),
     PRIMARY KEY (`id`)
@@ -25,6 +26,7 @@ CREATE TABLE `side_menu` (
     `name` VARCHAR(255) NOT NULL,
     `description` TEXT NOT NULL,
     `link` VARCHAR(255) NOT NULL,
+    `sort_order` INTEGER NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -36,6 +38,7 @@ CREATE TABLE `side_submenu` (
     `name` VARCHAR(255) NOT NULL,
     `description` TEXT NOT NULL,
     `link` VARCHAR(255) NOT NULL,
+    `sort_order` INTEGER NULL,
 
     INDEX `side_menu_id`(`side_menu_id`),
     PRIMARY KEY (`id`)

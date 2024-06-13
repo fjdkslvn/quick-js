@@ -4,6 +4,7 @@ declare module "sideMenuType" {
     name: string;
     description: string;
     link: string;
+    sort_order?: number;
     side_submenu: SideSubMenu[]; // 서브메뉴를 포함
   }
   
@@ -13,6 +14,7 @@ declare module "sideMenuType" {
     name: string;
     description: string;
     link: string;
+    sort_order?: number;
     docs: Docs[]; // 문서를 포함
   }
   
@@ -20,6 +22,7 @@ declare module "sideMenuType" {
     id: number;
     side_submenu_id: number;
     title: string;
+    sort_order?: number;
     description: string;
   }
 }
