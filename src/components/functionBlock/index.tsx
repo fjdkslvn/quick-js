@@ -2,17 +2,19 @@
 
 import CodeBlock from "@/components/functionBlock/codeBlock";
 import ResultBlock from "@/components/functionBlock/resultBlock";
-import Favorites from "@/components/favorites";
 
-const FunctionBlock: React.FC<{ id:number, title: string, description: string, displayCode: string, result: string }> = ({ id, title, description, displayCode, result}) => {
-
+const FunctionBlock: React.FC<{ id:number, title: string|null, favoritesTitle:string|null, description: string|null, result: string }> = ({ id, title, favoritesTitle, description, result}) => {
   return (
     <div className="pt-16" id={`docs${id}`}>
-      <h1 className="text-2xl font-bold mb-2 pt-4 flex items-center">
-        {title}
-        <Favorites docsID={id}/>
-      </h1>
-      <h2 className="mb-3">{description}</h2>
+      {title &&
+        <h1 className="text-2xl font-bold pt-4 flex items-center">
+          {title}
+        </h1>}
+      {description &&
+        <div className="mt-2">
+          {favoritesTitle && <h2 className="mb-1 ttext-lg font-semibold">{`* ${favoritesTitle} *`}</h2>}
+          <h2 className="mb-3">{description}</h2>
+        </div>}
       <CodeBlock id={id}/>
       <ResultBlock resultData={result}/>
     </div>

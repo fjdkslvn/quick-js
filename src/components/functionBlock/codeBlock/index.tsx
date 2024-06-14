@@ -6,6 +6,7 @@ import { Copy } from '@public/svgs';
 import Toast from '@/components/functionBlock/toast';
 import { useTheme } from 'next-themes';
 import { functionString } from '@/constants/fucntionData';
+import Favorites from '@/components/favorites';
 
 const CodeBlock: React.FC<{id: number;}> = ({ id }) => {
   const [codeString, setCodeString] = useState('');
@@ -46,7 +47,12 @@ const CodeBlock: React.FC<{id: number;}> = ({ id }) => {
       <div className="w-full">
         <div className="bg-blue-100 w-full h-9 rounded-t-lg px-4 py-2 text-sm text-gray-500 font-medium flex justify-between dark:text-gray-300 dark:bg-zinc-700">
           <div>index.js</div>
-          <Copy className={["cursor-pointer", styles.copyImage, ((theme ==='system' && systemTheme =='dark') || theme === 'dark') ?styles.dark :''].join(' ')} onClick={codeCopy} />
+          <div className="flex items-center">
+            <div className="mr-1">
+              <Favorites docsID={id}/>
+            </div>
+            <Copy className={["cursor-pointer", styles.copyImage, ((theme ==='system' && systemTheme =='dark') || theme === 'dark') ?styles.dark :''].join(' ')} onClick={codeCopy} />
+          </div>
         </div>
         <div className={["bg-blue-50 w-full min-h-24 rounded-b-lg px-4 py-2 text-sm text-gray-800 font-medium dark:bg-zinc-800", styles.codeHighlight].join(' ')}>
           {(theme ==='system' && systemTheme =='dark') || theme === 'dark'

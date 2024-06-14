@@ -21,8 +21,9 @@ declare module "sideMenuType" {
   export interface Docs {
     id: number;
     side_submenu_id: number;
-    title: string;
+    title: string | null;
+    favorites_title: string | null;
+    description: string | null;
     sort_order: number | null;
-    description: string;
   }
 }

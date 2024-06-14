@@ -1,7 +1,5 @@
 'use client'
 
-import Link from "next/link";
-import { RightArrow } from "@public/svgs";
 import FunctionBlock from '@/components/functionBlock';
 import DataInput from "@/components/dataInput";
 import PageNav from '@/components/pageNav';
@@ -79,7 +77,7 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
       <button className="block text-base mx-auto my-1 bg-blue-200 px-10 w-full h-12 rounded-lg text-gray-700 hover:bg-blue-300" onClick={createResult}>실행</button>
       <div>
         {docs?.map((docsItem, idx) => (
-          <FunctionBlock key={docsItem.id} id={docsItem.id} title={docsItem.title} description={docsItem.description} displayCode={functionData[`func${docsItem.id}`].toString()} result={resultList[idx]}/>
+          <FunctionBlock key={docsItem.id} id={docsItem.id} title={docsItem.title} favoritesTitle={docsItem.favorites_title} description={docsItem.description} result={resultList[idx]}/>
         ))}
       </div>
       <PageNav/>

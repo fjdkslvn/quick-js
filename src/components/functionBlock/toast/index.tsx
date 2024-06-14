@@ -14,7 +14,7 @@ const Toast: React.FC<{message:string, error?:boolean, onClose: ()=> void}> = ({
   }, [onClose]);
 
   return (
-    <div className={["fixed bottom-10 left-1/2 transform -translate-x-1/2 text-gray-900 px-4 py-2 rounded-md shadow-md text-xs"
+    <div className={["fixed bottom-10 left-1/2 transform -translate-x-1/2 text-gray-900 px-4 py-2 rounded-md shadow-md text-xs md:bottom-24"
                     ,error ? "bg-red-200" : "bg-amber-200"].join(' ')}>
       {message}
     </div>

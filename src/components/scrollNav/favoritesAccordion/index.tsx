@@ -58,13 +58,13 @@ const FavoritesAccordion: React.FC = () => {
                       href={`#docs${docs.id}`}
                       className={"text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500"}
                     >
-                      {docs.title}
+                      {docs.favorites_title ? docs.favorites_title : docs.title}
                     </a>
                     :<Link
                       href={`${docs.link}#docs${docs.id}` ?? ''}
                       className={"text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500"}
                     >
-                      {docs.title}
+                      {docs.favorites_title ? docs.favorites_title : docs.title}
                     </Link>}
                   </div>))
               : <div className={"text-xs font-semibold text-gray-500 dark:text-gray-400"}>즐겨찾기하는 문서가 없습니다</div>

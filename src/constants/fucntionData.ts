@@ -68,6 +68,20 @@ export const functionData: FuncData = {
     delete data.age;
     return data;
   },
+  func21: (data: any) => {
+    let str1 = "Let's study javascript. ";
+    return str1+data;
+  },
+  func22: (data: any) => {
+    return `Let's study javascript. ${data}`;
+  },
+  func23: (data: any) => {
+    let str1 = "Let's study javascript. ";
+    return str1.concat(data);
+  },
+  func24: (data: any) => {
+    return data.length;
+  },
 };
 
 export const functionString: FuncString = {
@@ -97,4 +111,15 @@ export const functionString: FuncString = {
   delete data.age;
 
   return data;`,
+  func21: `let str1 = "Let's study javascript. ";
+
+  // 더하기 연산자 사용
+  return str1 + data;`,
+  func22: `// 템플릿 리터럴 사용
+  return \`Let's study javascript. \${data}\`;`,
+  func23: `let str1 = "Let's study javascript. ";
+
+  // concat() 함수 사용
+  return str1.concat(data);`,
+  func24: `return data.length;`,
 };

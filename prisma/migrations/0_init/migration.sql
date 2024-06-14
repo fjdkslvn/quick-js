@@ -2,9 +2,10 @@
 CREATE TABLE `docs` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `side_submenu_id` INTEGER NOT NULL,
-    `title` VARCHAR(255) NOT NULL,
-    `description` TEXT NOT NULL,
+    `title` VARCHAR(255) NULL,
+    `description` TEXT NULL,
     `sort_order` INTEGER NULL,
+    `favorites_title` VARCHAR(255) NULL,
 
     INDEX `side_submenu_id`(`side_submenu_id`),
     PRIMARY KEY (`id`)
