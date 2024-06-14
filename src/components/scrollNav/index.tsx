@@ -48,8 +48,8 @@ const ScrollNav: React.FC = () => {
             <>
               <div className="text-sm font-semibold mb-4">현재 페이지</div>
               {scrollList.map((scrollInfo) => (
-                <div className="pb-2" key={`scrollTitle_${scrollInfo.id}`}>
-                  <a className="text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500" href={`#docs${scrollInfo.id}`}>{scrollInfo.favorites_title ? scrollInfo.favorites_title : scrollInfo.title}</a>
+                <div className="pb-3" key={`scrollTitle_${scrollInfo.id}`}>
+                  <a className="block text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500" href={`#docs${scrollInfo.id}`}>{scrollInfo.favorites_title ? scrollInfo.favorites_title : scrollInfo.title}</a>
                 </div>
               ))}
               <div className="w-full h-px bg-zinc-200 my-4 dark:bg-zinc-700"></div>

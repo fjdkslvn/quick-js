@@ -52,17 +52,17 @@ const FavoritesAccordion: React.FC = () => {
               </div>
             : (favoritesDocsList && favoritesDocsList.length > 0)
               ? favoritesDocsList.map((docs) => (
-                  <div className="pb-2" key={`favories_${docs.id}`}>
+                  <div className="pb-3" key={`favories_${docs.id}`}>
                     {pathName === docs.link
                     ?<a
                       href={`#docs${docs.id}`}
-                      className={"text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500"}
+                      className={"block text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500"}
                     >
                       {docs.favorites_title ? docs.favorites_title : docs.title}
                     </a>
                     :<Link
                       href={`${docs.link}#docs${docs.id}` ?? ''}
-                      className={"text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500"}
+                      className={"block text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500"}
                     >
                       {docs.favorites_title ? docs.favorites_title : docs.title}
                     </Link>}
