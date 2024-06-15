@@ -69,18 +69,27 @@ export const functionData: FuncData = {
     return data;
   },
   func21: (data: any) => {
-    let str1 = "Let's study javascript. ";
-    return str1+data;
+    let str1 = " Let's study javascript.";
+    return data+str1;
   },
   func22: (data: any) => {
-    return `Let's study javascript. ${data}`;
+    return `${data} Let's study javascript.`;
   },
   func23: (data: any) => {
-    let str1 = "Let's study javascript. ";
-    return str1.concat(data);
+    let str1 = " Let's study javascript.";
+    return data.concat(str1);
   },
   func24: (data: any) => {
     return data.length;
+  },
+  func25: (data: any) => {
+    return data.replace('world','developer');
+  },
+  func26: (data: any) => {
+    return data.replaceAll('H','@');
+  },
+  func27: (data: any) => {
+    return data.replace(/world|you/g, "??");
   },
 };
 
@@ -111,15 +120,21 @@ export const functionString: FuncString = {
   delete data.age;
 
   return data;`,
-  func21: `let str1 = "Let's study javascript. ";
+  func21: `let str1 = " Let's study javascript.";
 
   // 더하기 연산자 사용
-  return str1 + data;`,
+  return data + str1;`,
   func22: `// 템플릿 리터럴 사용
-  return \`Let's study javascript. \${data}\`;`,
-  func23: `let str1 = "Let's study javascript. ";
+  return \`\${data} Let's study javascript.\`;`,
+  func23: `let str1 = " Let's study javascript.";
 
   // concat() 함수 사용
-  return str1.concat(data);`,
+  return data.concat(str1);`,
   func24: `return data.length;`,
+  func25: `// replace는 첫번째로 일치되는 항목만 교체합니다.
+  return data.replace('world','developer');`,
+  func26: `// replceAll은 일치되는 항목 모두를 교체합니다.
+  return data.replaceAll('H','@');`,
+  func27: `// world와 you와 일치되는 항목 모두를 교체합니다.
+  return data.replace(/world|you/g, "??");`,
 };

@@ -1,56 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 html{
-    height: 100%;
+  height: 100%;
 }
 body {
-    height: 100%;
-    margin: 0px;
+  height: 100%;
+  margin: 0px;
 }
 a {
-    text-decoration: none;
-    user-select: none;
+  text-decoration: none;
+  user-select: none;
 }
 textarea{
-    border: 2px solid #bfdbfe;
-    outline-color: #3b82f6;
-    border-radius: 4px;
-    resize: none;
+  border: 2px solid #bfdbfe;
+  outline-color: #3b82f6;
+  border-radius: 4px;
+  resize: none;
 }
 
 :root {
-    --color: #000000;
-    --background: #ffffff;
+  --color: #000000;
+  --background: #ffffff;
 }
 
 :root.dark {
-    --color: #ffffff;
-    /* --background: rgb(25, 25, 25); */
-    --background: #b82d2d;
+  --color: #ffffff;
+  /* --background: rgb(25, 25, 25); */
+  --background: #b82d2d;
 }
 .dark body {
-    background:rgb(17, 17, 17);
+  background:rgb(17, 17, 17);
 }
 
 .visible-mobile{
-    display: none;
+  display: none;
 }
 @media (max-width: 767px) {
-	.visible-mobile{
-        display: block;
-    }
+.visible-mobile{
+    display: block;
+  }
 }
 .invisible-mobile{
-    display: block;
+  display: block;
 }
 @media (max-width: 767px) {
-	.invisible-mobile{
-        display: none;
-    }
+.invisible-mobile{
+    display: none;
+  }
 }
 
 
 .backdrop-filter-blur-8 {
-    backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }

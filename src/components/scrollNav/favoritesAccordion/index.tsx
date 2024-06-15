@@ -40,7 +40,7 @@ const FavoritesAccordion: React.FC = () => {
 
   return (
     <div className="text-sm">
-      <div className={"flex items-center text-sm font-semibold mb-4"}>
+      <div className={"flex items-center text-sm font-semibold mb-5"}>
         즐겨찾기
         <StarRateIcon className="text-base ml-2 text-yellow-400"/>
       </div>

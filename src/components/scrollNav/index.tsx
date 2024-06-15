@@ -46,7 +46,7 @@ const ScrollNav: React.FC = () => {
           <div className="w-full h-px bg-zinc-200 my-4 dark:bg-zinc-700"></div>
           {scrollList.length > 0 &&
             <>
-              <div className="text-sm font-semibold mb-4">현재 페이지</div>
+              <div className="text-sm font-semibold mb-5">현재 페이지</div>
               {scrollList.map((scrollInfo) => (
                 <div className="pb-3" key={`scrollTitle_${scrollInfo.id}`}>
                   <a className="block text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500" href={`#docs${scrollInfo.id}`}>{scrollInfo.favorites_title ? scrollInfo.favorites_title : scrollInfo.title}</a>
