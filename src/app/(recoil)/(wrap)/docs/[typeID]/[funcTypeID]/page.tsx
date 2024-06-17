@@ -60,16 +60,22 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
   }
 
   const createResult = () => {
-    if(docs && data){
+    if (docs && data) {
       let newResultList: string[] = [];
-      docs.map((docsInfo:Docs) => {
-        const useData = params.typeID === 'string' ? data : eval('(' + data + ')');
-        const resultData = functionData[`func${docsInfo.id}`](useData);
-        newResultList.push(JSON.stringify(resultData));
+      docs.map((docsInfo: Docs) => {
+        try {
+          const useData = params.typeID === 'string' ? data : eval('(' + data + ')');
+          const resultData = functionData[`func${docsInfo.id}`](useData);
+          newResultList.push(JSON.stringify(resultData));
+        } catch (error: any) {
+          // 에러 발생 시 에러 메시지를 문자열로 추가
+          newResultList.push(`error : ${JSON.stringify(error.message).slice(1,-1)}`);
+        }
       });
       setResultList(newResultList);
     }
-  }
+  }  
+
 
   return (
     <>
