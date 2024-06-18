@@ -39,7 +39,7 @@ const DataInput: React.FC<{ dataType: DataSelectorType }> = ({ dataType }) => {
         placeholder={'데이터를 넣어주세요.'}
         onChange={handleChange}
       />
-      <RestartAltIcon className={["cursor-pointer absolute right-2 bottom-4 text-gray-600 dark:text-gray-300", resetActive && "text-amber-500 dark:text-amber-500"].join(' ')} onClick={resetData}/>
+      <RestartAltIcon className={["cursor-pointer absolute right-2 bottom-4", resetActive ? "text-amber-500 dark:text-amber-500" : "text-gray-600 dark:text-gray-300"].join(' ')} onClick={resetData}/>
     </div>
   );
 };
