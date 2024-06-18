@@ -61,7 +61,7 @@ const Header: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
             <div className="ml-auto mr-2 text-xs">{`${session.user?.name}님`}</div>
             <div className="cursor-pointer mr-6 text-sm font-medium text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-500" onClick={() => signOut()}>로그아웃</div>
           </>
-          :<div className="ml-auto cursor-pointer mr-6 text-sm font-medium text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-500" onClick={() => signIn()}>로그인</div>}
+          :<div className="ml-auto cursor-pointer mr-6 text-sm font-medium text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-500" onClick={() => signIn('google')}>로그인</div>}
           <div className="invisible-mobile">
             <ThemeSeletor/>
           </div>
