@@ -91,6 +91,14 @@ export const functionData: FuncData = {
   func27: (data: any) => {
     return data.replace(/world|you/g, "??");
   },
+  func28: (data: any) => {
+    let additionalData = {study: "javascript", hobby: "exercise"};
+    return Object.assign(data, additionalData);
+  },
+  func29: (data: any) => {
+    let additionalData = {study: "javascript", hobby: "exercise"};
+    return {...data, ...additionalData};
+  },
 };
 
 export const functionString: FuncString = {
@@ -137,4 +145,12 @@ export const functionString: FuncString = {
   return data.replaceAll('H','@');`,
   func27: `// world와 you와 일치되는 항목 모두를 교체합니다.
   return data.replace(/world|you/g, "??");`,
+  func28: `// 합쳐질 데이터
+  let additionalData = { study: "javascript", hobby: "exercise" };
+  
+  return Object.assign(data, additionalData);`,
+  func29: `// 합쳐질 데이터
+  let additionalData = { study: "javascript", hobby: "exercise" };
+
+  return { ...data, ...additionalData };`,
 };
