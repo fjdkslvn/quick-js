@@ -2,7 +2,6 @@ import { atom } from "recoil";
 import { Docs, SideSubMenu } from 'sideMenuType';
 
 export interface Favorites{
-  user_id: string;
   docs_id: number;
   docs: DocsWithLink;
 }

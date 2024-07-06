@@ -1,5 +1,5 @@
 import Notice from '@/components/notice';
-import { notice } from '@prisma/client';
+import { notice } from 'noticeType';
 
 export default async function Page() {
   try {

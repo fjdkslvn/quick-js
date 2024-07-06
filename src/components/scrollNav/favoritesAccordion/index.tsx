@@ -2,39 +2,44 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react"
+import { User, userData } from "@/recoil/userAtom";
 import { useRecoilState } from "recoil";
 import { favoritesIDData, favoritesDocsData, DocsWithLink } from '@/recoil/favoritesAtom';
 import { setFavoritesData } from "@/utils/favoritesData";
+import { SideMenu } from 'sideMenuType';
+import { sideMenuData } from '@/recoil/sideMenuAtom';
 import { usePathname } from "next/navigation";
 import StarRateIcon from '@mui/icons-material/StarRate';
 import Image from "next/image";
 
 const FavoritesAccordion: React.FC = () => {
-  const { data: session } = useSession();
+  const [user, setUser] = useRecoilState<User>(userData);
   const [loadState, setLoadState] = useState(false);
+  const [sideMenu, setSideMenu] = useRecoilState<SideMenu[]>(sideMenuData);
   const [faoritesIDList, setFaoritesIDList] = useRecoilState(favoritesIDData);
   const [favoritesDocsList, setFavoritesDocsList] = useRecoilState(favoritesDocsData);
   const pathName = usePathname();
 
   useEffect(() => {
-    if(session){
+    if(user && user.user_id){
       setLoadState(true);
       getFavoritesList();
     }
-  },[session]);
+  },[user]);
 
   useEffect(() => {
     setLoadState(false);
   },[favoritesDocsList])
 
   const getFavoritesList = async () => {
-    const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/favorites?user_id=${session?.user?.id}`, { cache: 'no-store' });
+    const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/favorites?user_id=${user.user_id}`, { cache: 'no-store' });
     const { status, data } = await resp.json();
     if(status === 200 && data){
-      const [docsIdList, docsList]: [number[], DocsWithLink[]] = setFavoritesData(data);
+      const [docsIdList, docsList]: [number[], DocsWithLink[]] = setFavoritesData(data,sideMenu);
       setFaoritesIDList(docsIdList);
       setFavoritesDocsList(docsList);
+    } else{
+      setLoadState(false);
     }
   }
 
@@ -45,7 +50,7 @@ const FavoritesAccordion: React.FC = () => {
         <StarRateIcon className="text-base ml-2 text-yellow-400"/>
       </div>
       <div>
-        {session
+        {(user && user.user_id)
           ? loadState
             ? <div className="flex justify-center">
                 <Image className="animate-spin" alt="로딩바" src="/images/icons/loading.png" width={36} height={36}/>

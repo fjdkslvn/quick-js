@@ -4,17 +4,16 @@ import PageNav from '@/components/pageNav';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { sideMenuData } from '@/recoil/sideMenuAtom';
-import { SideMenu } from 'sideMenuType';
+import { SideMenu, SideSubMenu } from 'sideMenuType';
 import { PageNav as PageNavType, PageNavData } from '@/recoil/pageNavAtom';
-import { side_menu, side_submenu } from '@prisma/client';
 import { extractSubMenuData } from '@/utils/sideMenuData';
 
 export default function Page({ params }: { params: { typeID: string } }) {
 
   const [sideToDocs, setSideToDocs] = useRecoilState<SideMenu[]>(sideMenuData);
   const [pageNavData, setPageNavData] = useRecoilState<PageNavType>(PageNavData);
-  const [menu, setMenu] = useState<side_menu | null>(null);
-  const [subMenu, setSubMenu] = useState<side_submenu[] | null>(null);
+  const [menu, setMenu] = useState<SideMenu | null>(null);
+  const [subMenu, setSubMenu] = useState<SideSubMenu[] | null>(null);
 
   useEffect(() => {
     if(sideToDocs){

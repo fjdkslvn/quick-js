@@ -1,18 +1,26 @@
-import { Favorites, DocsWithLink } from "@/recoil/favoritesAtom";
+import { DocsWithLink } from "@/recoil/favoritesAtom";
+import { SideMenu } from 'sideMenuType';
 
-export function setFavoritesData (data: Favorites[]): [number[], DocsWithLink[]] {
-  const docsIdList: number[] = [];
+export function setFavoritesData (favoritesIDList: number[], sideMenu: SideMenu[]): [number[], DocsWithLink[]] {
   const docsList: DocsWithLink[] = [];
 
-  if (data) {
-    for (const favorite of data) {
-      let docsData = favorite.docs;
-      docsIdList.push(docsData.id);
-      docsData.link = docsData.side_submenu?.link;
-      delete docsData.side_submenu;
-      docsList.push(docsData);
-    }
+  const filteredDocs: DocsWithLink[] = [];
+
+  // 데이터 순회하며 필터링
+  for (const category of sideMenu) {
+      for (const submenu of category.side_submenu) {
+          for (const doc of submenu.docs) {
+              if (favoritesIDList.includes(doc.id)) {
+                  // 상위 side_submenu의 link 값을 doc 객체에 추가
+                  const docWithLink = {
+                      ...doc,
+                      link: submenu.link
+                  };
+                  filteredDocs.push(docWithLink);
+              }
+          }
+      }
   }
 
-  return [docsIdList, docsList];
+  return [favoritesIDList, filteredDocs];
 };

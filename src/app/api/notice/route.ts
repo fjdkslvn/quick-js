@@ -1,16 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import initializeFirebaseApp from '@/db/firebase';
 
 export async function GET(request: NextRequest) {
   try {
-    const data = await prisma.notice.findMany({
-        orderBy: {
-          create_date: 'desc'
-        }
-      });
-    return NextResponse.json(data);
+    const db = await initializeFirebaseApp();
+    const noticeRef = db.collection('service').doc('notice');
+    const noticeDoc = await noticeRef.get();
+    const noticeList = await noticeDoc.data();
+
+    return NextResponse.json(noticeList ? noticeList.notice : []);
   } catch (error) {
     console.error('Error getting notice:', error);
   }
