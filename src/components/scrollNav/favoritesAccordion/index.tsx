@@ -67,7 +67,7 @@ const FavoritesAccordion: React.FC = () => {
         즐겨찾기
         <StarRateIcon className="text-base ml-2 text-yellow-400"/>
       </div>
-      <div>
+      <div className="max-h-32 md:max-h-none overflow-auto">
         {(user && user.user_id)
           ? loadState
             ? <div className="flex justify-center">
