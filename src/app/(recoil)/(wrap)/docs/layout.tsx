@@ -9,13 +9,13 @@ export default function Layout({
   
   return (
     <div className="grid place-items-center">
+      <div className="z-[5] block w-full sticky top-[4rem] md:hidden">
+        <Sidebar />
+        <ScrollNav/>
+      </div>
       <div className="max-w-screen-xl display flex-row w-full md:flex">
         <div className="hidden md:block">
           <Sidebar />
-        </div>
-        <div className="block md:hidden">
-          <Sidebar />
-          <ScrollNav/>
         </div>
         <div className="flex flex-row w-full">
           <div className="w-full px-8 py-10 lg:px-12">

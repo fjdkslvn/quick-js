@@ -37,7 +37,7 @@ textarea{
 .visible-mobile{
   display: none;
 }
-@media (max-width: 767px) {
+@media (max-width: 48rem) {
 .visible-mobile{
     display: block;
   }
@@ -45,13 +45,12 @@ textarea{
 .invisible-mobile{
   display: block;
 }
-@media (max-width: 767px) {
+@media (max-width: 48rem) {
 .invisible-mobile{
     display: none;
   }
 }
 
-
 .backdrop-filter-blur-8 {
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(0.5rem);
 }

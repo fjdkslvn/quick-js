@@ -14,12 +14,15 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        backColor : '#ffffff',
-        backDarkColor : 'rgb(17, 17, 17)',
+        backColor: "#ffffff",
+        backDarkColor: "rgb(17, 17, 17)",
+      },
+      maxHeight: {
+        remaining: "calc(100vh - 8rem)",
       },
     },
   },
-  darkMode: 'class', // 다크 모드를 클래스 기반으로 설정
+  darkMode: "class", // 다크 모드를 클래스 기반으로 설정
   plugins: [],
 };
 export default config;
