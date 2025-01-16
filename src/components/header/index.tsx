@@ -87,7 +87,7 @@ const Header: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
 
   return (
     <>
-      <div className="border-b border-zinc-200 grid place-items-center sticky top-0 z-10 backdrop-filter-blur-8 bg-white bg-opacity-85 dark:bg-opacity-85 dark:bg-backDarkColor dark:border-zinc-700">
+      <div className="z-10 border-b border-zinc-200 grid place-items-center sticky top-0 backdrop-filter-blur-8 bg-white bg-opacity-85 dark:bg-opacity-85 dark:bg-backDarkColor dark:border-zinc-700">
         <nav className="flex flex-row items-center max-w-screen-xl w-full h-16">
           <Link className="ml-6 mr-10 text-lg font-medium" href="/">
             <Image className="block dark:hidden" src="/images/logo.png" alt="로고" width="120" height="45"/>
@@ -114,7 +114,7 @@ const Header: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
         </nav>
       </div>
       {toggle &&
-        <div className="flex flex-col justify-between fixed top-16 px-4 pt-4 pb-20 bg-backColor border-t border-zinc-200 w-full h-full md:hidden dark:bg-backDarkColor dark:border-zinc-700">
+        <div className="z-10 flex flex-col justify-between fixed top-16 px-4 pt-4 pb-20 bg-backColor border-t border-zinc-200 w-full h-full md:hidden dark:bg-backDarkColor dark:border-zinc-700">
           <div>
             <Link className="text-sm pl-2 h-9 my-1 flex items-center rounded text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-neutral-800" href="/docs/string" onClick={() => mobileMovePage("/docs/string")}>문서</Link>
             <Link className="text-sm pl-2 h-9 my-1 flex items-center rounded text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-neutral-800" href="/notice" onClick={() => mobileMovePage("/notice")}>공지사항</Link>
