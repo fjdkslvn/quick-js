@@ -14,9 +14,9 @@ a {
   user-select: none;
 }
 textarea{
-  border: 2px solid #bfdbfe;
-  outline-color: #3b82f6;
-  border-radius: 4px;
+  border: 0.125rem solid #bfdbfe;
+  outline-color: #93c5fd;
+  border-radius: 0.5rem;
   resize: none;
 }
 
