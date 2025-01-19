@@ -1,7 +1,4 @@
-import Copy from './icons/copy.svg';
-import RightArrow from './rightArrow.svg';
+import Copy from "./icons/copy.svg";
+import RightArrow from "./icons/rightArrow.svg";
 
-export {
-  Copy,
-  RightArrow
-};
+export { Copy, RightArrow };
