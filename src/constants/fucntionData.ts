@@ -1,103 +1,103 @@
 export interface FuncData {
-  [key: string] : (data: any) => void;
+  [key: string]: (data: any) => void;
 }
 export interface FuncString {
-  [key: string] : string;
+  [key: string]: string;
 }
 
 export const functionData: FuncData = {
-  func1: (data: any) => {
-    return data.includes('Hello');
-  },
-  func2: (data: any) => {
-    return data.includes('Hello', 5);
-  },
-  func3: (data: any) => {
-    return data.indexOf('world');
-  },
-  func4: (data: any) => {
-    return data.indexOf('Hello', 5);
-  },
-  func5: (data: any) => {
-    return data.split(' ');
-  },
-  func6: (data: any) => {
-    return data.split(/[,!?]/);
-  },
-  func7: (data: any) => {
-    return data.split('',4);
-  },
-  func8: (data: any) => {
-    return data.slice(7);
-  },
-  func9: (data: any) => {
-    return data.slice(7, 12);
-  },
-  func10: (data: any) => {
-    return data.slice(-6);
-  },
-  func11: (data: any) => {
-    return data.toUpperCase();
-  },
-  func12: (data: any) => {
-    return data.toLowerCase();
-  },
-  func13: (data: any) => {
-    return data.trim();
-  },
-  func14: (data: any) => {
-    return data.trimLeft();
-  },
-  func15: (data: any) => {
-    return data.trimRight();
-  },
-  func16: (data: any) => {
-    return Object.keys(data);
-  },
-  func17: (data: any) => {
-    return Object.values(data);
-  },
-  func18: (data: any) => {
-    return Object.entries(data);
-  },
-  func19: (data: any) => {
-    data.study = 'javascript';
-    return data;
-  },
-  func20: (data: any) => {
-    delete data.age;
-    return data;
-  },
-  func21: (data: any) => {
+  string_common_1: (data: any) => {
     let str1 = " Let's study javascript.";
-    return data+str1;
+    return data + str1;
   },
-  func22: (data: any) => {
+  string_common_2: (data: any) => {
     return `${data} Let's study javascript.`;
   },
-  func23: (data: any) => {
+  string_common_3: (data: any) => {
     let str1 = " Let's study javascript.";
     return data.concat(str1);
   },
-  func24: (data: any) => {
+  string_common_4: (data: any) => {
     return data.length;
   },
-  func25: (data: any) => {
-    return data.replace('world','developer');
+  string_includes_1: (data: any) => {
+    return data.includes("Hello");
   },
-  func26: (data: any) => {
-    return data.replaceAll('H','@');
+  string_includes_2: (data: any) => {
+    return data.includes("Hello", 5);
   },
-  func27: (data: any) => {
+  string_indexOf_1: (data: any) => {
+    return data.indexOf("world");
+  },
+  string_indexOf_2: (data: any) => {
+    return data.indexOf("Hello", 5);
+  },
+  string_split_1: (data: any) => {
+    return data.split(" ");
+  },
+  string_split_2: (data: any) => {
+    return data.split(/[,!?]/);
+  },
+  string_split_3: (data: any) => {
+    return data.split("", 4);
+  },
+  string_slice_1: (data: any) => {
+    return data.slice(7);
+  },
+  string_slice_2: (data: any) => {
+    return data.slice(7, 12);
+  },
+  string_slice_3: (data: any) => {
+    return data.slice(-6);
+  },
+  string_replace_1: (data: any) => {
+    return data.replace("world", "developer");
+  },
+  string_replace_2: (data: any) => {
+    return data.replaceAll("H", "@");
+  },
+  string_replace_3: (data: any) => {
     return data.replace(/world|you/g, "??");
   },
-  func28: (data: any) => {
-    let additionalData = {study: "javascript", hobby: "exercise"};
+  string_letterCase_1: (data: any) => {
+    return data.toUpperCase();
+  },
+  string_letterCase_2: (data: any) => {
+    return data.toLowerCase();
+  },
+  string_trim_1: (data: any) => {
+    return data.trim();
+  },
+  string_trim_2: (data: any) => {
+    return data.trimLeft();
+  },
+  string_trim_3: (data: any) => {
+    return data.trimRight();
+  },
+  object_common_1: (data: any) => {
+    data.study = "javascript";
+    return data;
+  },
+  object_common_2: (data: any) => {
+    delete data.age;
+    return data;
+  },
+  object_common_3: (data: any) => {
+    let additionalData = { study: "javascript", hobby: "exercise" };
     return Object.assign(data, additionalData);
   },
-  func29: (data: any) => {
-    let additionalData = {study: "javascript", hobby: "exercise"};
-    return {...data, ...additionalData};
+  object_common_4: (data: any) => {
+    let additionalData = { study: "javascript", hobby: "exercise" };
+    return { ...data, ...additionalData };
+  },
+  object_key_1: (data: any) => {
+    return Object.keys(data);
+  },
+  object_values_1: (data: any) => {
+    return Object.values(data);
+  },
+  object_entries_1: (data: any) => {
+    return Object.entries(data);
   },
 };
 

@@ -8,7 +8,7 @@ import { useTheme } from 'next-themes';
 import { functionString } from '@/constants/fucntionData';
 import Favorites from '@/components/favorites';
 
-const CodeBlock: React.FC<{id: number;}> = ({ id }) => {
+const CodeBlock: React.FC<{typeID:string, funcTypeID:string, id: number}> = ({ typeID, funcTypeID, id }) => {
   const [codeString, setCodeString] = useState('');
   const [showToast, setShowToast] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -26,7 +26,7 @@ const CodeBlock: React.FC<{id: number;}> = ({ id }) => {
 
   // 화면에 보여질 함수 텍스트를 만드는 함수
   const setDisplayCode = () => {
-    let newDisplayCode = functionString[`func${id}`];
+    let newDisplayCode = functionString[`${typeID}_${funcTypeID}_${id}`];
     setCodeString(`const handle = (data) => {
   ${newDisplayCode}
 }`);

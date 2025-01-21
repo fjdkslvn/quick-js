@@ -65,7 +65,7 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
       docs.map((docsInfo: Docs) => {
         try {
           const useData = params.typeID === 'string' ? data : eval('(' + data + ')');
-          const resultData = functionData[`func${docsInfo.id}`](useData);
+          const resultData = functionData[`${params.typeID}_${params.funcTypeID}_${docsInfo.id}`](useData);
           newResultList.push(JSON.stringify(resultData));
         } catch (error: any) {
           // 에러 발생 시 에러 메시지를 문자열로 추가
@@ -83,7 +83,7 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
       <button className="block text-base mx-auto my-1 bg-blue-200 px-10 w-full h-12 rounded-lg text-gray-700 hover:bg-blue-300" onClick={createResult}>실행</button>
       <div>
         {docs?.map((docsItem, idx) => (
-          <FunctionBlock key={docsItem.id} id={docsItem.id} title={docsItem.title} favoritesTitle={docsItem.favorites_title} description={docsItem.description} result={resultList[idx]}/>
+          <FunctionBlock key={docsItem.id} typeID={params.typeID} funcTypeID={params.funcTypeID} id={docsItem.id} title={docsItem.title} favoritesTitle={docsItem.favorites_title} description={docsItem.description} result={resultList[idx]}/>
         ))}
       </div>
       <PageNav/>
