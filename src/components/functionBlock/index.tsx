@@ -3,7 +3,7 @@
 import CodeBlock from "@/components/functionBlock/codeBlock";
 import ResultBlock from "@/components/functionBlock/resultBlock";
 
-const FunctionBlock: React.FC<{ id:number, title: string|null, favoritesTitle:string|null, description: string|null, result: string }> = ({ id, title, favoritesTitle, description, result}) => {
+const FunctionBlock: React.FC<{ typeID:string, funcTypeID:string, id:number, title: string|null, favoritesTitle:string|null, description: string|null, result: string }> = ({ typeID, funcTypeID, id, title, favoritesTitle, description, result}) => {
   return (
     <div className="pt-16" id={`docs${id}`}>
       {title &&
@@ -15,7 +15,7 @@ const FunctionBlock: React.FC<{ id:number, title: string|null, favoritesTitle:st
           {favoritesTitle && <h2 className="mb-1 ttext-lg font-semibold">{`* ${favoritesTitle} *`}</h2>}
           <h2 className="mb-3">{description}</h2>
         </div>}
-      <CodeBlock id={id}/>
+      <CodeBlock id={id} typeID={typeID} funcTypeID={funcTypeID}/>
       <ResultBlock resultData={result}/>
     </div>
   );
