@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { User, userData } from "@/recoil/userAtom";
 import { useRecoilState } from "recoil";
-import { favoritesIDData, favoritesDocsData, DocsWithLink } from '@/recoil/favoritesAtom';
+import { favoritesIDData, favoritesDocsData, DocsWithID } from '@/recoil/favoritesAtom';
 import { setFavoritesData } from "@/utils/favoritesData";
 import { SideMenu } from 'sideMenuType';
 import { sideMenuData } from '@/recoil/sideMenuAtom';
@@ -47,13 +47,14 @@ const FavoritesAccordion: React.FC = () => {
 
   useEffect(() => {
     setLoadState(false);
+    console.log(favoritesDocsList);
   },[favoritesDocsList]);
 
   const getFavoritesList = async () => {
     const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/favorites?user_id=${user.user_id}`, { cache: 'no-store' });
     const { status, data } = await resp.json();
     if(status === 200 && data){
-      const [docsIdList, docsList]: [number[], DocsWithLink[]] = setFavoritesData(data,sideMenu);
+      const [docsIdList, docsList]: [string[], DocsWithID[]] = setFavoritesData(data,sideMenu);
       setFaoritesIDList(docsIdList);
       setFavoritesDocsList(docsList);
     } else{
@@ -75,31 +76,31 @@ const FavoritesAccordion: React.FC = () => {
               </div>
             : (favoritesDocsList && favoritesDocsList.length > 0)
               ? favoritesDocsList.map((docs) => (
-                  <div className="pb-3" key={`favories_${docs.id}`}>
+                  <div className="pb-3" key={`favories_${docs.favorites_id?.replaceAll('_','-')}`}>
                     {isMobile
-                    ?pathName === docs.link
+                    ?pathName === `/docs/${docs.type_id}/${docs.func_type_id}`
                       ?<div
-                        onClick={() => updateHash(`#docs${docs.id}`)}
+                        onClick={() => updateHash(`#${docs.favorites_id?.replaceAll('_','-')}`)}
                         className={"block text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500"}
                       >
                         {docs.favorites_title ? docs.favorites_title : docs.title}
                       </div>
                       :<Link
-                        href={`${docs.link}`}
-                        onClick={() => updateHash(`#docs${docs.id}`)}
+                        href={`/docs/${docs.type_id}/${docs.func_type_id}`}
+                        onClick={() => updateHash(`#${docs.favorites_id?.replaceAll('_','-')}`)}
                         className={"block text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500"}
                       >
                         {docs.favorites_title ? docs.favorites_title : docs.title}
                       </Link>
-                    :pathName === docs.link
+                    :pathName === `/docs/${docs.type_id}/${docs.func_type_id}`
                       ?<a
-                        href={`#docs${docs.id}`}
+                        href={`#${docs.favorites_id?.replaceAll('_','-')}`}
                         className={"block text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500"}
                       >
                         {docs.favorites_title ? docs.favorites_title : docs.title}
                       </a>
                       :<Link
-                        href={`${docs.link}#docs${docs.id}`}
+                        href={`/docs/${docs.type_id}/${docs.func_type_id}#${docs.favorites_id?.replaceAll('_','-')}`}
                         className={"block text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500"}
                       >
                         {docs.favorites_title ? docs.favorites_title : docs.title}

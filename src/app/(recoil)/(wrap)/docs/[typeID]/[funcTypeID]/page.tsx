@@ -5,7 +5,6 @@ import DataInput from "@/components/dataInput";
 import PageNav from '@/components/pageNav';
 import { useRecoilState, RecoilState } from 'recoil';
 import { dataSelector } from '@/recoil/funcDataAtom';
-import { functionData } from '@/constants/fucntionData';
 import { sideMenuData } from '@/recoil/sideMenuAtom';
 import { PageNav as PageNavType, PageNavData } from '@/recoil/pageNavAtom';
 import { useEffect, useState } from 'react';
@@ -25,18 +24,12 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
     if(sideToDocs){
       const { data: docsData, menuIndex, subMenuIndex } = extractDocsData(sideToDocs, params.typeID, params.funcTypeID);
       if(menuIndex !== -1 && subMenuIndex !== -1){
-        /* 페이지 네비 데이터 세팅 */
-        const beforePageData = subMenuIndex === 0 ? sideToDocs[menuIndex] : sideToDocs[menuIndex].side_submenu[subMenuIndex-1];
-        const afterPageData = sideToDocs[menuIndex].side_submenu.length-1 === subMenuIndex
-                                ? sideToDocs.length-1 !== menuIndex ? sideToDocs[menuIndex+1] : null
-                                : sideToDocs[menuIndex].side_submenu[subMenuIndex+1];
         setPageNavData({
-          beforeLink : beforePageData.link,
-          beforeName : beforePageData.name,
-          afterLink : afterPageData ? afterPageData.link : '',
-          afterName : afterPageData ? afterPageData.name : ''
+          beforeLink : subMenuIndex === 0 ? `/docs/${sideToDocs[menuIndex].name}` : `/docs/${sideToDocs[menuIndex].name}/${sideToDocs[menuIndex].side_submenu[subMenuIndex-1].name}`,
+          beforeName : subMenuIndex === 0 ? sideToDocs[menuIndex].name : sideToDocs[menuIndex].side_submenu[subMenuIndex-1].name,
+          afterLink : sideToDocs[menuIndex].side_submenu.length-1 === subMenuIndex ? sideToDocs[menuIndex+1] ? `/docs/${sideToDocs[menuIndex+1].name}` : '' : `/docs/${sideToDocs[menuIndex].name}/${sideToDocs[menuIndex].side_submenu[subMenuIndex+1].name}`,
+          afterName : sideToDocs[menuIndex].side_submenu.length-1 === subMenuIndex ? sideToDocs[menuIndex+1] ? sideToDocs[menuIndex+1].name : '' : sideToDocs[menuIndex].side_submenu[subMenuIndex+1].name
         });
-        
         setDocs(docsData);
       }
     }
@@ -64,8 +57,8 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
       let newResultList: string[] = [];
       docs.map((docsInfo: Docs) => {
         try {
-          const useData = params.typeID === 'string' ? data : eval('(' + data + ')');
-          const resultData = functionData[`${params.typeID}_${params.funcTypeID}_${docsInfo.id}`](useData);
+          const useData = (params.typeID === 'string' || params.typeID === 'date') ? data : eval('(' + data + ')');
+          const resultData = docsInfo.func_data(useData);
           newResultList.push(JSON.stringify(resultData));
         } catch (error: any) {
           // 에러 발생 시 에러 메시지를 문자열로 추가
@@ -83,7 +76,7 @@ export default function Page({ params }: { params: { typeID: string, funcTypeID:
       <button className="block text-base mx-auto my-1 bg-blue-200 px-10 w-full h-12 rounded-lg text-gray-700 hover:bg-blue-300" onClick={createResult}>실행</button>
       <div>
         {docs?.map((docsItem, idx) => (
-          <FunctionBlock key={docsItem.id} typeID={params.typeID} funcTypeID={params.funcTypeID} id={docsItem.id} title={docsItem.title} favoritesTitle={docsItem.favorites_title} description={docsItem.description} result={resultList[idx]}/>
+          <FunctionBlock key={docsItem.id} typeID={params.typeID} funcTypeID={params.funcTypeID} id={docsItem.id} title={docsItem.title} favoritesTitle={docsItem.favorites_title} description={docsItem.description} funcString={docsItem.code_example} result={resultList[idx]}/>
         ))}
       </div>
       <PageNav/>

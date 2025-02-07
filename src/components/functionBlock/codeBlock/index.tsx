@@ -5,10 +5,9 @@ import styles from './styles.module.css';
 import { Copy } from '@public/svgs';
 import Toast from '@/components/functionBlock/toast';
 import { useTheme } from 'next-themes';
-import { functionString } from '@/constants/fucntionData';
 import Favorites from '@/components/favorites';
 
-const CodeBlock: React.FC<{typeID:string, funcTypeID:string, id: number}> = ({ typeID, funcTypeID, id }) => {
+const CodeBlock: React.FC<{typeID:string, funcTypeID:string, id: number, funcString:string}> = ({ typeID, funcTypeID, id, funcString }) => {
   const [codeString, setCodeString] = useState('');
   const [showToast, setShowToast] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -26,7 +25,7 @@ const CodeBlock: React.FC<{typeID:string, funcTypeID:string, id: number}> = ({ t
 
   // 화면에 보여질 함수 텍스트를 만드는 함수
   const setDisplayCode = () => {
-    let newDisplayCode = functionString[`${typeID}_${funcTypeID}_${id}`];
+    let newDisplayCode = funcString;
     setCodeString(`const handle = (data) => {
   ${newDisplayCode}
 }`);
@@ -49,7 +48,7 @@ const CodeBlock: React.FC<{typeID:string, funcTypeID:string, id: number}> = ({ t
           <div>index.js</div>
           <div className="flex items-center">
             <div className="mr-1">
-              <Favorites docsID={id}/>
+              <Favorites typeID={typeID} funcTypeID={funcTypeID} docsID={id}/>
             </div>
             <Copy className={["cursor-pointer", styles.copyImage, ((theme ==='system' && systemTheme =='dark') || theme === 'dark') ?styles.dark :''].join(' ')} onClick={codeCopy} />
           </div>

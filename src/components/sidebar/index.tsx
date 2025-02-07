@@ -60,11 +60,11 @@ const Sidebar: React.FC = () => {
       <nav className={["border-solid border-zinc-200 dark:border-zinc-700 overflow-auto transition-max-height duration-500", toggle ? 'max-h-screen border-b md:border-hidden' : 'max-h-0 md:max-h-remaining',"min-w-56 sticky top-16"].join(' ')}>
         <div className="px-6 py-4 max-h-[20rem] overflow-auto md:max-h-none md:overflow-hidden bg-white dark:bg-backDarkColor">
           {sideMenu?.map((menu) => (
-            <div className="text-sm" key={`menu_${menu.id}`}>
+            <div className="text-sm" key={`menu_${menu.name}`}>
               <Link
-                href={menu.link}
+                href={`/docs/${menu.name}`}
                 onClick={handleLinkClick}
-                className={pathName === menu.link
+                className={pathName === `/docs/${menu.name}`
                             ? "text-blue-500 font-bold px-2 h-9 my-1 flex items-center rounded hover:bg-gray-100 dark:hover:bg-neutral-800"
                             : "text-gray-600 px-2 h-9 my-1 flex items-center rounded hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-neutral-800"}
               >
@@ -72,12 +72,12 @@ const Sidebar: React.FC = () => {
               </Link>
               <div>
                 {menu.side_submenu.map((sub_menu) => (
-                    <div className="flex flex-row w-full items-center" key={`sub_menu_${sub_menu.id}`}>
+                    <div className="flex flex-row w-full items-center" key={`sub_menu_${sub_menu.name}`}>
                       <div className="w-px h-10 mx-3 bg-gray-300 dark:bg-gray-600"></div>
                       <Link
-                        href={sub_menu.link}
+                        href={`/docs/${menu.name}/${sub_menu.name}`}
                         onClick={handleLinkClick}
-                        className={pathName === sub_menu.link
+                        className={pathName === `/docs/${menu.name}/${sub_menu.name}`
                                     ? "w-full text-blue-500 font-bold px-2 h-9 flex items-center rounded my-0.5"
                                     : "w-full text-gray-600 px-2 h-9 flex items-center rounded my-0.5 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-neutral-800"}
                       >

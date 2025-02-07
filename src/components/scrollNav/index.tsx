@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Docs, SideMenu } from "sideMenuType";
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
@@ -20,6 +20,14 @@ const ScrollNav: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [hash, setHash] = useState('');
   const pathName = usePathname();
+
+  const { typeID, funcTypeID } = useMemo(() => {
+    const parts = pathName.split("/").filter(Boolean); // 빈 문자열 제거
+    return {
+      typeID: parts[1] || "",
+      funcTypeID: parts[2] || "",
+    };
+  }, [pathName]);
 
   useEffect(()=>{
     const pathSplit = pathName.split('/');
@@ -103,10 +111,10 @@ const ScrollNav: React.FC = () => {
               {scrollList.map((scrollInfo) => (
                 isMobile
                 ?<div className="pb-3" key={`scrollTitle_${scrollInfo.id}`}>
-                  <div className="block text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500" onClick={() => updateHash(`#docs${scrollInfo.id}`)}>{scrollInfo.favorites_title ? scrollInfo.favorites_title : scrollInfo.title}</div>
+                  <div className="block text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500" onClick={() => updateHash(`#${typeID}-${funcTypeID}-${scrollInfo.id}`)}>{scrollInfo.favorites_title ? scrollInfo.favorites_title : scrollInfo.title}</div>
                 </div>
                 :<div className="pb-3" key={`scrollTitle_${scrollInfo.id}`}>
-                  <a className="block text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500" href={`#docs${scrollInfo.id}`}>{scrollInfo.favorites_title ? scrollInfo.favorites_title : scrollInfo.title}</a>
+                  <a className="block text-xs font-semibold cursor-pointer hover:text-blue-500 dark:hover:text-blue-500" href={`#${typeID}-${funcTypeID}-${scrollInfo.id}`}>{scrollInfo.favorites_title ? scrollInfo.favorites_title : scrollInfo.title}</a>
                 </div>
               ))}
               <div className="w-full h-px bg-zinc-200 my-4 dark:bg-zinc-700"></div>

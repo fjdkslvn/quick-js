@@ -6,7 +6,6 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ThemeSeletor from "../themeSeletor";
 import { useRecoilState } from 'recoil';
-import { sideMenuData } from '@/recoil/sideMenuAtom';
 import { userData, User } from '@/recoil/userAtom';
 import { SideMenu } from 'sideMenuType';
 import { usePathname } from "next/navigation";
@@ -14,14 +13,12 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from '@/db/firebaseAuth';
 import Cookies from 'js-cookie';
 
-const Header: React.FC<{ sideMenuList:SideMenu[] }> = ({ sideMenuList }) => {
-  const [sideMenu, setSideMenu] = useRecoilState<SideMenu[]>(sideMenuData);
+const Header: React.FC = () => {
   const [user, setUser] = useRecoilState<User>(userData);
   const [toggle, setToggle] = useState(false);
   const pathName = usePathname();
   
   useEffect(() => {
-    setSideMenu(sideMenuList);
     const user_id = Cookies.get('quickJS-user-id');
     const user_name = Cookies.get('quickJS-user-name');
 

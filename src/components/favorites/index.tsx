@@ -1,16 +1,16 @@
 'use client'
 import { useRecoilState } from 'recoil';
 import { User, userData } from '@/recoil/userAtom';
-import { favoritesDocsData, favoritesIDData, DocsWithLink } from '@/recoil/favoritesAtom';
+import { favoritesDocsData, favoritesIDData, DocsWithID } from '@/recoil/favoritesAtom';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarRateIcon from '@mui/icons-material/StarRate';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { setFavoritesData } from '@/utils/favoritesData';
 import Toast from '@/components/functionBlock/toast';
 import { SideMenu } from 'sideMenuType';
 import { sideMenuData } from '@/recoil/sideMenuAtom';
 
-const Favorites: React.FC<{docsID:number}> = ({docsID}) => {
+const Favorites: React.FC<{typeID:string, funcTypeID:string, docsID: number}> = ({ typeID, funcTypeID, docsID }) => {
   const [user, setUser] = useRecoilState<User>(userData);
   const [sideMenu, setSideMenu] = useRecoilState<SideMenu[]>(sideMenuData);
   const [favoritesActive, setFavoritesActive] = useState(false);
@@ -20,13 +20,15 @@ const Favorites: React.FC<{docsID:number}> = ({docsID}) => {
   const [toastErrorState, setToastErrorState] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
 
+  const docsKeyName = useMemo(() => `${typeID}_${funcTypeID}_${docsID}`, [typeID, funcTypeID, docsID]);
+
   useEffect(() => {
-    if(faoritesIDList.includes(docsID)){
+    if(faoritesIDList.includes(docsKeyName)){
       setFavoritesActive(true);
     } else {
       setFavoritesActive(false);
     }
-  },[docsID, faoritesIDList]);
+  },[docsKeyName, faoritesIDList]);
 
   const handleAddData = async () => {
     const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/favorites`, {
@@ -36,13 +38,13 @@ const Favorites: React.FC<{docsID:number}> = ({docsID}) => {
       },
       body: JSON.stringify({
         user_id: user.user_id,
-        docs_id: docsID
+        faorites_id: docsKeyName
       }),
     });
     
     const { status, data, msg } = await resp.json();
     if(status === 200 && data){
-      const [docsIdList, docsList]: [number[], DocsWithLink[]] = setFavoritesData(data, sideMenu);
+      const [docsIdList, docsList]: [string[], DocsWithID[]] = setFavoritesData(data, sideMenu);
       setFaoritesIDList(docsIdList);
       setFavoritesDocsList(docsList);
     } else if(status !== 200){
@@ -53,7 +55,7 @@ const Favorites: React.FC<{docsID:number}> = ({docsID}) => {
   }
   const handleDeldData = async () => {
     if(user && user.user_id){
-      const newIDList = faoritesIDList.filter(id => id !== docsID);
+      const newIDList = faoritesIDList.filter(id => id !== docsKeyName);
       const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/favorites?user_id=${user.user_id}&docs_id_list=${JSON.stringify(newIDList)}`, {
         method: 'DELETE',
         headers: {
@@ -63,7 +65,7 @@ const Favorites: React.FC<{docsID:number}> = ({docsID}) => {
       
       const { status, data, msg } = await resp.json();
       if(status === 200 && data){
-        const [docsIdList, docsList]: [number[], DocsWithLink[]] = setFavoritesData(data, sideMenu);
+        const [docsIdList, docsList]: [string[], DocsWithID[]] = setFavoritesData(data, sideMenu);
         setFaoritesIDList(docsIdList);
         setFavoritesDocsList(docsList);
       } else if(status !== 200){
