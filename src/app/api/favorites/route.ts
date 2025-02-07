@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import initializeFirebaseApp from "@/db/firebase";
 import { FieldValue } from "firebase-admin/firestore";
+import { setCorsHeaders } from "@/utils/cors";
 
 const getFavoritesDocs = async (userID: string) => {
   const db = await initializeFirebaseApp();
@@ -15,7 +16,8 @@ export async function GET(request: NextRequest) {
     const userID = request.nextUrl.searchParams.get("user_id");
     const favoriteDocs = await getFavoritesDocs(userID ?? "");
 
-    return NextResponse.json({ data: favoriteDocs, status: 200 });
+    const response = NextResponse.json({ data: favoriteDocs, status: 200 });
+    return setCorsHeaders(response); // CORS 설정 추가
   } catch (error) {
     console.error("Error getting favorites:", error);
   }
@@ -42,18 +44,20 @@ export async function POST(request: NextRequest) {
     }
 
     const favoriteDocs = await getFavoritesDocs(body.user_id);
-    return NextResponse.json({
+    const response = NextResponse.json({
       msg: "즐겨찾기에 추가되었습니다.",
       data: favoriteDocs,
       status: 200,
     });
+    return setCorsHeaders(response); // CORS 설정 추가
   } catch (error) {
     console.error("Error adding favorite:", error);
-    return NextResponse.json({
+    const response = NextResponse.json({
       msg: "즐겨찾기에 추가하지 못했습니다.",
       error: error,
       status: 500,
     });
+    return setCorsHeaders(response); // CORS 설정 추가
   }
 }
 
@@ -69,17 +73,19 @@ export async function DELETE(request: NextRequest) {
     });
 
     const favoriteDocs = await getFavoritesDocs(userID);
-    return NextResponse.json({
+    const response = NextResponse.json({
       msg: "즐겨찾기에서 제외되었습니다.",
       data: favoriteDocs,
       status: 200,
     });
+    return setCorsHeaders(response); // CORS 설정 추가
   } catch (error) {
     console.error("Error deleting favorite:", error);
-    return NextResponse.json({
+    const response = NextResponse.json({
       msg: "즐겨찾기에서 제외하지 못했습니다.",
       error: error,
       status: 500,
     });
+    return setCorsHeaders(response); // CORS 설정 추가
   }
 }
