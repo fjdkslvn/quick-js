@@ -7,11 +7,9 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ThemeSeletor from "../themeSeletor";
 import { useRecoilState } from 'recoil';
 import { userData, User } from '@/recoil/userAtom';
-import { SideMenu } from 'sideMenuType';
 import { usePathname } from "next/navigation";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from '@/db/firebaseAuth';
-import Cookies from 'js-cookie';
 
 const Header: React.FC = () => {
   const [user, setUser] = useRecoilState<User>(userData);
@@ -19,14 +17,21 @@ const Header: React.FC = () => {
   const pathName = usePathname();
   
   useEffect(() => {
-    const user_id = Cookies.get('quickJS-user-id');
-    const user_name = Cookies.get('quickJS-user-name');
-
-    setUser({
-      user_id : user_id ?? '',
-      name : user_name ?? ''
+    // 로그인 상태가 변경될 때마다 호출
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser({
+          user_id: user.uid,
+          name: user.displayName ?? '',
+        });
+      } else {
+        setUser({ user_id: '', name: '' });  // 상태 초기화
+      }
     });
-  },[]);
+
+    // 컴포넌트 언마운트 시 구독 취소
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     setToggle(false);
@@ -63,24 +68,22 @@ const Header: React.FC = () => {
 
       const expirationDate = new Date();
       expirationDate.setTime(expirationDate.getTime() + (2 * 24 * 60 * 60 * 1000)); // 2일 후의 시간
-
-      // 쿠키 설정
-      Cookies.set('quickJS-user-id', result.user.uid ?? '', { expires: expirationDate });
-      Cookies.set('quickJS-user-name', result.user.displayName ?? '', { expires: expirationDate });
     })
-    .catch((error)=> {
-    }); 
+    .catch((error) => {
+      console.error("Google Sign-In error:", error);
+    });
   }
 
   const logout = () => {
-    Cookies.remove('quickJS-user-id');
-    Cookies.remove('quickJS-user-name');
-    
-    setUser({
-      user_id : '',
-      name : ''
-    });
-  }
+    signOut(auth)
+      .then(() => {
+        setUser({ user_id: '', name: '' });  // 상태 초기화
+      })
+      .catch((error) => {
+        // 로그아웃 실패
+        console.error("Error during sign-out:", error);
+      });
+  };
 
   return (
     <>
